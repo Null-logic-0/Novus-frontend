@@ -6,6 +6,11 @@ import Home from "../pages/Home.jsx";
 import Search from "../pages/Search.jsx";
 import Activity from "../pages/Activity.jsx";
 import Profile from "../pages/Profile.jsx";
+import BlockedProfiles from "../pages/BlockedProfiles.jsx";
+import ChangePassword from "../pages/ChangePassword.jsx";
+import Login from "../pages/Login.jsx";
+import Signup from "../pages/Singup.jsx";
+import SettingsRoot from "../pages/SettingsRoot.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,12 +24,20 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "settings",
+    element: <SettingsRoot />,
+    children: [
+      { path: "blocked-profiles", element: <BlockedProfiles /> },
+      { path: "change-password", element: <ChangePassword /> },
+    ],
+  },
+  {
     path: "signup",
-    element: <h1>signup</h1>,
+    element: <Signup />,
   },
   {
     path: "login",
-    element: <h1>login</h1>,
+    element: <Login />,
   },
 ]);
 function App() {
