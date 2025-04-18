@@ -1,8 +1,11 @@
+import Container from "../components/Container";
+import CreatePostBar from "../components/CreatePostBar";
+
 function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <Container>
+      <CreatePostBar />
+    </Container>
   );
 }
 

@@ -7,6 +7,9 @@ function RootLayout() {
     <div>
       <Header />
       <NavMenu />
+      <main className="flex justify-center items-center h-screen pt-14 pb-2">
+        <Outlet />
+      </main>
     </div>
   );
 }
