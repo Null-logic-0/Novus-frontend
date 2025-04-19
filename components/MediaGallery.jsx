@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { VscUnmute } from "react-icons/vsc";
-import { VscMute } from "react-icons/vsc";
+import { VscUnmute, VscMute } from "react-icons/vsc";
 
 function MediaGallery({ media }) {
   const containerRef = useRef(null);
   const [minHeight, setMinHeight] = useState(null);
   const [muted, setMuted] = useState(true);
+  const [hasVideo, setHasVideo] = useState(false);
+
+  useEffect(() => {
+    const videoExists = media.some((file) => file.match(/\.(mp4|mov)$/i));
+    setHasVideo(videoExists);
+  }, [media]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -45,13 +50,15 @@ function MediaGallery({ media }) {
 
   return (
     <div className="relative">
-      {/*  Mute/Unmute Button */}
-      <button
-        onClick={() => setMuted((prev) => !prev)}
-        className="absolute z-10 right-5 bottom-2 text-xl bg-opacity-50 text-white px-3 py-1 rounded-md cursor-pointer"
-      >
-        {muted ? <VscMute /> : <VscUnmute />}
-      </button>
+      {/* Mute/Unmute Button (only if video exists) */}
+      {hasVideo && (
+        <button
+          onClick={() => setMuted((prev) => !prev)}
+          className="absolute z-10 right-5 bottom-2 text-xl text-white px-3 py-1 rounded-md cursor-pointer"
+        >
+          {muted ? <VscMute /> : <VscUnmute />}
+        </button>
+      )}
 
       {/* Media Display */}
       <div
