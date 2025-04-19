@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import ContentContainer from "../components/ContentContainer";
 import CreatePostBar from "../components/CreatePostBar";
 import MainContentContainer from "../components/MainContentContainer";
@@ -23,25 +24,30 @@ const POSTS = [
 
 function Posts() {
   return (
-    <MainContentContainer>
-      <CreatePostBar />
-      {POSTS.map((post) => (
-        <ContentContainer key={post.id}>
-          {post.content.map((contentItem) => (
-            <PostItem
-              key={contentItem.id}
-              name={post.name}
-              caption={contentItem.caption}
-              media={contentItem.media}
-              likes={contentItem.likes}
-              time={contentItem.time}
-              link={`${post.id}/post/${contentItem.id}`}
-              comments={contentItem.comments}
-            />
-          ))}
-        </ContentContainer>
-      ))}
-    </MainContentContainer>
+    <>
+      <Helmet>
+        <title>Home | Novus</title>
+      </Helmet>
+      <MainContentContainer>
+        <CreatePostBar />
+        {POSTS.map((post) => (
+          <ContentContainer key={post.id}>
+            {post.content.map((contentItem) => (
+              <PostItem
+                key={contentItem.id}
+                name={post.name}
+                caption={contentItem.caption}
+                media={contentItem.media}
+                likes={contentItem.likes}
+                time={contentItem.time}
+                link={`${post.id}/post/${contentItem.id}`}
+                comments={contentItem.comments}
+              />
+            ))}
+          </ContentContainer>
+        ))}
+      </MainContentContainer>
+    </>
   );
 }
 
