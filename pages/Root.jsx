@@ -4,10 +4,10 @@ import Header from "../components/Header";
 
 function RootLayout() {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col bg-black text-white overflow-y-auto">
       <Header />
       <NavMenu />
-      <main className="flex justify-center items-center h-screen pt-14 pb-2">
+      <main className="flex justify-center items-center pt-14 pb-8 ">
         <Outlet />
       </main>
     </div>

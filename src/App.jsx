@@ -2,7 +2,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "../util/http.js";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import RootLayout from "../pages/Root.jsx";
-import Home from "../pages/Home.jsx";
+import Posts from "../pages/Posts.jsx";
 import Search from "../pages/Search.jsx";
 import Activity from "../pages/Activity.jsx";
 import Profile from "../pages/Profile.jsx";
@@ -17,10 +17,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Posts /> },
       { path: "search", element: <Search /> },
       { path: "activity", element: <Activity /> },
       { path: ":slug", element: <Profile /> },
+      { path: ":userId/post/:postId", element: <Profile /> },
     ],
   },
   {

@@ -1,18 +1,12 @@
-import { Link } from "react-router";
 import Button from "./UI/Button";
 import Input from "./UI/Input";
+import ProfileAvatar from "./ProfileAvatar";
 
 function CreatePostBar() {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center  justify-between p-4 max-md:hidden">
       <div className="flex items-center w-full">
-        <Link to="user">
-          <img
-            src="../src/assets/default.jpg"
-            alt="user-name"
-            className="object-fill w-10 h-10 rounded-full"
-          />
-        </Link>
+        <ProfileAvatar link="user" alt={"user"} />
         <Input
           className="bg-transparent border-none w-full"
           placeholder="What's new ?"
