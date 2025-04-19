@@ -12,10 +12,11 @@ function PostItem({
   media = [],
   likes,
   comments,
+  link,
 }) {
   return (
     <div className="flex items-start gap-2 ">
-      <ProfileAvatar alt={"user"} img={profileImg} />
+      <ProfileAvatar alt={name} img={profileImg} />
 
       <div className="flex flex-col p-[2px]">
         <p className="font-bold text-[14px]">
@@ -27,7 +28,7 @@ function PostItem({
         <p className="text-[14px]">{caption}</p>
 
         <MediaGallery media={media} />
-        <PostActions likes={likes} comments={comments} />
+        <PostActions likes={likes} comments={comments} link={link} />
       </div>
     </div>
   );

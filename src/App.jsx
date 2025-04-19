@@ -11,6 +11,8 @@ import ChangePassword from "../pages/ChangePassword.jsx";
 import Login from "../pages/Login.jsx";
 import Signup from "../pages/Singup.jsx";
 import SettingsRoot from "../pages/SettingsRoot.jsx";
+import Post from "../pages/Post.jsx";
+import Media from "../pages/Media.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,8 @@ const router = createBrowserRouter([
       { path: "search", element: <Search /> },
       { path: "activity", element: <Activity /> },
       { path: ":slug", element: <Profile /> },
-      { path: ":userId/post/:postId", element: <Profile /> },
+      { path: ":userId/post/:postId", element: <Post /> },
+      { path: ":userId/post/:postId/media", element: <Media /> },
     ],
   },
   {

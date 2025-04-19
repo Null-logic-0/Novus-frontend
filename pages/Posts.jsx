@@ -8,45 +8,16 @@ const POSTS = [
     id: 1,
     profile: "/src/assets/default.jpg",
     name: "Luka",
-    caption: "Hello world!",
-    media: ["/src/assets/testImg/img1.jpg", "/src/assets/testImg/vid1.mov"],
-    likes: 10,
-    comments: 3,
-    time: "1s",
-  },
-  {
-    id: 4,
-    profile: "/src/assets/default.jpg",
-    name: "Dua Lipa",
-    caption: "Hello world!",
-    media: ["/src/assets/testImg/vid3.mp4"],
-    likes: "10k",
-    comments: 3,
-    time: "12w",
-  },
-  {
-    id: 2,
-    profile: "/src/assets/default.jpg",
-    name: "John",
-    caption: "Nice day!",
-    media: ["/src/assets/testImg/img2.WEBP"],
-    likes: 5,
-    comments: 1,
-    time: "2d",
-  },
-  {
-    id: 3,
-    profile: "/src/assets/default.jpg",
-    name: "Elena",
-    caption: "Nice day!",
-    media: [
-      "/src/assets/testImg/img1.jpg",
-      "/src/assets/testImg/img1.jpg",
-      "/src/assets/testImg/img1.jpg",
+    content: [
+      {
+        id: "23e",
+        media: ["/src/assets/testImg/img1.jpg", "/src/assets/testImg/vid1.mov"],
+        likes: "2",
+        caption: "Hello world!",
+        comments: "2",
+        time: "1s",
+      },
     ],
-    likes: 5,
-    comments: 1,
-    time: "2d",
   },
 ];
 
@@ -55,16 +26,19 @@ function Posts() {
     <MainContentContainer>
       <CreatePostBar />
       {POSTS.map((post) => (
-        <ContentContainer>
-          <PostItem
-            key={post.id}
-            name={post.name}
-            caption={post.caption}
-            media={post.media}
-            likes={post.likes}
-            time={post.time}
-            comments={post.comments}
-          />
+        <ContentContainer key={post.id}>
+          {post.content.map((contentItem) => (
+            <PostItem
+              key={contentItem.id}
+              name={post.name}
+              caption={contentItem.caption}
+              media={contentItem.media}
+              likes={contentItem.likes}
+              time={contentItem.time}
+              link={`${post.id}/post/${contentItem.id}`}
+              comments={contentItem.comments}
+            />
+          ))}
         </ContentContainer>
       ))}
     </MainContentContainer>
