@@ -2,7 +2,7 @@ import Logo from "./Logo";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import MenuButton from "./UI/MenuButton";
 
-function Header() {
+function MainHeader() {
   return (
     <header className="xl:hidden  bg-[#0f0f0f] w-full fixed z-50 top-0 md:hidden">
       <div className="w-full flex justify-center">
@@ -17,4 +17,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default MainHeader;
