@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import MainContentContainer from "../components/MainContentContainer";
 import SearchInput from "../components/SearchInput";
 import UserList from "../components/UserList";
+import PagesHeader from "../components/PagesHeader";
 
 const USER = [
   {
@@ -20,6 +21,7 @@ function Search() {
       <Helmet>
         <title>Search | Novus</title>
       </Helmet>
+      <PagesHeader title={"Search"} />
       <MainContentContainer>
         <div className="p-6">
           <SearchInput />

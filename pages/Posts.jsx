@@ -3,6 +3,7 @@ import ContentContainer from "../components/ContentContainer";
 import CreatePostBar from "../components/CreatePostBar";
 import MainContentContainer from "../components/MainContentContainer";
 import PostItem from "../components/PostItem";
+import PagesHeader from "../components/PagesHeader";
 
 const POSTS = [
   {
@@ -22,12 +23,19 @@ const POSTS = [
   },
 ];
 
+const options = [
+  { label: "Feed", value: "feed" },
+  { label: "Followers", value: "followers" },
+  { label: "Liked", value: "liked" },
+];
+
 function Posts() {
   return (
     <>
       <Helmet>
         <title>Home | Novus</title>
       </Helmet>
+      <PagesHeader dropDown={true} options={options} />
       <MainContentContainer>
         <CreatePostBar />
         {POSTS.map((post) => (
