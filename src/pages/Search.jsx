@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet";
-import MainContentContainer from "../components/MainContentContainer";
-import SearchInput from "../components/SearchInput";
-import UserList from "../components/UserList";
-import PagesHeader from "../components/PagesHeader";
+import MainContentContainer from "../../components/MainContentContainer";
+import PagesHeader from "../../components/PagesHeader";
+import SearchInput from "../../components/SearchInput";
+import UserList from "../../components/UserList";
 
 const USER = [
   {

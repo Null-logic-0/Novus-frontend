@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet";
-import ContentContainer from "../components/ContentContainer";
-import CreatePostBar from "../components/CreatePostBar";
-import MainContentContainer from "../components/MainContentContainer";
-import PostItem from "../components/PostItem";
-import PagesHeader from "../components/PagesHeader";
+import PagesHeader from "../../components/PagesHeader";
+import MainContentContainer from "../../components/MainContentContainer";
+import ContentContainer from "../../components/ContentContainer";
+import PostItem from "../../components/PostItem";
+import CreatePostBar from "../../components/CreatePostBar";
 
 const POSTS = [
   {

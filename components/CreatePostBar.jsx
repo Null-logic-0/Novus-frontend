@@ -3,6 +3,7 @@ import Input from "./UI/Input";
 import ProfileAvatar from "./ProfileAvatar";
 import Modal from "./UI/Modal";
 import { useState } from "react";
+import CreatePost from "./CreatePost";
 
 function CreatePostBar() {
   const [createPost, setCreatePost] = useState(false);
@@ -37,8 +38,7 @@ function CreatePostBar() {
 
       {createPost && (
         <Modal onClose={handleClosePost}>
-          <h1>hello</h1>
-          <button onClick={handleClosePost}>Close</button>
+          <CreatePost />
         </Modal>
       )}
     </>

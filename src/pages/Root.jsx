@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
-import NavMenu from "../components/NavMenu";
-import MainHeader from "../components/MainHeader";
+
+import MainHeader from "../../components/MainHeader";
+import NavMenu from "../../components/NavMenu";
 
 function RootLayout() {
   return (

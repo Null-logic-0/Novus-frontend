@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router";
-import MainContentContainer from "../components/MainContentContainer";
-import CreatePostBar from "../components/CreatePostBar";
-import ContentContainer from "../components/ContentContainer";
-import PostItem from "../components/PostItem";
-import PagesHeader from "../components/PagesHeader";
-import ProfileHeader from "../components/ProfileHeader";
+
+import ProfileHeader from "../../components/ProfileHeader";
+import MainContentContainer from "../../components/MainContentContainer";
+import CreatePostBar from "../../components/CreatePostBar";
+import ContentContainer from "../../components/ContentContainer";
+import PostItem from "../../components/PostItem";
+import PagesHeader from "../../components/PagesHeader";
 
 const POSTS = [
   {
