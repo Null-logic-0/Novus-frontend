@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../src/store/UI-slice";
+
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiSearch2Fill } from "react-icons/ri";
@@ -7,16 +10,21 @@ import { GoHeartFill } from "react-icons/go";
 import { RiUser3Fill } from "react-icons/ri";
 import { RiUser3Line } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
+import MenuButton from "./MenuButton";
 import NavItem from "./NavItem";
-import Logo from "./Logo";
-import MenuButton from "./UI/MenuButton";
+import Modal from "../UI/Modal";
+import CreatePost from "../CreatePost";
 
-function NavMenu() {
+function NavMenuList() {
+  const dispatch = useDispatch();
+  const showModal = useSelector((state) => state.ui.modalIsVisible);
+
+  const toggleModalHandler = () => {
+    dispatch(uiActions.toggle());
+  };
   return (
-    <nav className="flex flex-col  items-center bg-[#0f0f0f] xl:h-full md:h-full xl:max-w-[80px] fixed max-md:w-full p-3 xl:pb-8 z-10 xl:left-0 max-md:flex-row max-md:justify-center max-md:bottom-0">
-      <Logo className="max-md:hidden ml-2" />
+    <>
       <ul className="flex flex-col items-center h-full justify-center xl:gap-7 max-md:flex-row max-md:justify-between  max-md:w-full">
         <NavItem
           link="/"
@@ -28,7 +36,7 @@ function NavMenu() {
           active={<RiSearch2Fill />}
           unActive={<RiSearch2Line />}
         />
-        <MenuButton>
+        <MenuButton onClick={toggleModalHandler}>
           <FaPlus />
         </MenuButton>
         <NavItem
@@ -42,11 +50,13 @@ function NavMenu() {
           unActive={<RiUser3Line />}
         />
       </ul>
-      <MenuButton className="max-md:hidden">
-        <HiOutlineMenuAlt2 />
-      </MenuButton>
-    </nav>
+      {showModal && (
+        <Modal onClose={toggleModalHandler}>
+          <CreatePost onCancel={toggleModalHandler} />
+        </Modal>
+      )}
+    </>
   );
 }
 
-export default NavMenu;
+export default NavMenuList;

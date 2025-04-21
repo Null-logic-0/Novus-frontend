@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet";
-import MainContentContainer from "../../components/MainContentContainer";
 import PagesHeader from "../../components/PagesHeader";
 import SearchInput from "../../components/SearchInput";
 import UserList from "../../components/UserList";
+import MainContainer from "../../components/MainContainer";
 
 const USER = [
   {
@@ -22,7 +22,7 @@ function Search() {
         <title>Search | Novus</title>
       </Helmet>
       <PagesHeader title={"Search"} />
-      <MainContentContainer>
+      <MainContainer>
         <div className="p-6">
           <SearchInput />
         </div>
@@ -33,7 +33,7 @@ function Search() {
         <section className="px-6 py-4">
           <UserList users={USER} />
         </section>
-      </MainContentContainer>
+      </MainContainer>
     </>
   );
 }

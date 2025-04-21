@@ -1,20 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../src/store/UI-slice";
+
 import Button from "./UI/Button";
 import Input from "./UI/Input";
 import ProfileAvatar from "./ProfileAvatar";
 import Modal from "./UI/Modal";
-import { useState } from "react";
 import CreatePost from "./CreatePost";
 
 function CreatePostBar() {
-  const [createPost, setCreatePost] = useState(false);
+  const showModal = useSelector((state) => state.ui.modalIsVisible);
+  const dispatch = useDispatch();
 
-  function handleCreatePost() {
-    setCreatePost(true);
-  }
-
-  function handleClosePost() {
-    setCreatePost(false);
-  }
+  const toggleModalHandler = () => {
+    dispatch(uiActions.toggle());
+  };
 
   return (
     <>
@@ -25,20 +24,20 @@ function CreatePostBar() {
             className="bg-transparent border-none w-full"
             placeholder="What's new ?"
             readOnly
-            onClick={handleCreatePost}
+            onClick={toggleModalHandler}
           />
         </div>
         <Button
           className="border-2 border-[#333333] text-white bg-[#171717] max-w-16 p-2"
-          onClick={handleCreatePost}
+          onClick={toggleModalHandler}
         >
           Post
         </Button>
       </div>
 
-      {createPost && (
-        <Modal onClose={handleClosePost}>
-          <CreatePost />
+      {showModal && (
+        <Modal onClose={toggleModalHandler}>
+          <CreatePost onCancel={toggleModalHandler} />
         </Modal>
       )}
     </>

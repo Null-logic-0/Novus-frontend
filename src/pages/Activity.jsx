@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import PagesHeader from "../../components/PagesHeader";
-import MainContentContainer from "../../components/MainContentContainer";
 import UserList from "../../components/UserList";
+import MainContainer from "../../components/MainContainer";
 
 const USER = [
   {
@@ -28,11 +28,11 @@ function Activity() {
         <title>Activity | Novus</title>
       </Helmet>
       <PagesHeader dropDown={true} options={options} />
-      <MainContentContainer>
+      <MainContainer>
         <section className="px-6 py-4">
           <UserList users={USER} />
         </section>
-      </MainContentContainer>
+      </MainContainer>
     </>
   );
 }

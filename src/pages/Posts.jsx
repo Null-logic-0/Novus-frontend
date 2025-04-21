@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet";
+
 import PagesHeader from "../../components/PagesHeader";
-import MainContentContainer from "../../components/MainContentContainer";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/PostItem";
 import CreatePostBar from "../../components/CreatePostBar";
+import MainContainer from "../../components/MainContainer";
 
 const POSTS = [
   {
@@ -36,7 +37,7 @@ function Posts() {
         <title>Home | Novus</title>
       </Helmet>
       <PagesHeader dropDown={true} options={options} />
-      <MainContentContainer>
+      <MainContainer>
         <CreatePostBar />
         {POSTS.map((post) => (
           <ContentContainer key={post.id}>
@@ -54,7 +55,7 @@ function Posts() {
             ))}
           </ContentContainer>
         ))}
-      </MainContentContainer>
+      </MainContainer>
     </>
   );
 }

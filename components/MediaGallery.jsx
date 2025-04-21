@@ -55,7 +55,7 @@ function MediaGallery({ media }) {
   return (
     <div
       ref={containerRef}
-      className="overflow-x-scroll pt-2 max-w-[630px]  flex  items-start gap-2 pr-6 scrollbar-hide"
+      className="overflow-x-scroll pt-2 max-w-[630px] max-md:max-w-[300px] max-md:pr-4 flex  items-start gap-2 pr-6 scrollbar-hide"
     >
       {/* Videos */}
       {videos.map((file) => (
@@ -69,7 +69,7 @@ function MediaGallery({ media }) {
           </button>
           <video
             src={file}
-            className="rounded-xl w-80  object-cover"
+            className="rounded-xl w-80 max-md:w-50  object-cover"
             style={{ maxWidth: "none", maxHeight: minHeight }}
             autoPlay
             loop
@@ -85,7 +85,7 @@ function MediaGallery({ media }) {
           key={`image-${file.id}`}
           src={file}
           alt={`media-${file.id}`}
-          className="rounded-xl w-80 object-cover"
+          className="rounded-xl w-80 max-md:w-50 object-cover"
           style={{ height: minHeight || "auto" }}
         />
       ))}

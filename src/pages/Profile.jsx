@@ -2,11 +2,11 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router";
 
 import ProfileHeader from "../../components/ProfileHeader";
-import MainContentContainer from "../../components/MainContentContainer";
 import CreatePostBar from "../../components/CreatePostBar";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/PostItem";
 import PagesHeader from "../../components/PagesHeader";
+import MainContainer from "../../components/MainContainer";
 
 const POSTS = [
   {
@@ -35,7 +35,7 @@ function Profile() {
       </Helmet>
       <PagesHeader title="Profile" />
 
-      <MainContentContainer>
+      <MainContainer>
         <ProfileHeader />
         <hr className="border-[#4d4d4d]" />
 
@@ -56,7 +56,7 @@ function Profile() {
             ))}
           </ContentContainer>
         ))}
-      </MainContentContainer>
+      </MainContainer>
     </>
   );
 }
