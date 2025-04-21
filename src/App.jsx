@@ -13,7 +13,7 @@ import Signup from "./pages/Singup.jsx";
 import Login from "./pages/Login.jsx";
 import SettingsRoot from "./pages/SettingsRoot.jsx";
 import BlockedProfiles from "./pages/BlockedProfiles.jsx";
-import ChangePassword from "./pages/ChangePassword.jsx";
+import Account from "./pages/Account.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <SettingsRoot />,
     children: [
       { path: "blocked-profiles", element: <BlockedProfiles /> },
-      { path: "change-password", element: <ChangePassword /> },
+      { path: "account", element: <Account /> },
     ],
   },
   {

@@ -1,6 +1,6 @@
-import Button from "./UI/Button";
-import FormUI from "./UI/FormUI";
-import Input from "./UI/Input";
+import Button from "../UI/Button";
+import FormUI from "../UI/FormUI";
+import Input from "../UI/Input";
 
 function LoginForm() {
   return (

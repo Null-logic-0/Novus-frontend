@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "../src/store/UI-slice";
+import { uiActions } from "../../src/store/UI-slice";
 
-import Button from "./UI/Button";
-import Input from "./UI/Input";
-import ProfileAvatar from "./ProfileAvatar";
-import Modal from "./UI/Modal";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
+import ProfileAvatar from "../ProfileAvatar";
+import Modal from "../UI/Modal";
 import CreatePost from "./CreatePost";
 
 function CreatePostBar() {

@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 
-import SignupForm from "../../components/SignupForm";
 import NavigationButton from "../../components/UI/NavigationButton";
+import SignupForm from "../../components/Authorization/SignupForm";
 
 function Signup() {
   return (

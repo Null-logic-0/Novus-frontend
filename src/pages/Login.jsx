@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { Helmet } from "react-helmet";
 
-import LoginForm from "../../components/LoginForm";
 import NavigationButton from "../../components/UI/NavigationButton";
+import LoginForm from "../../components/Authorization/LoginForm";
 
 function Login() {
   return (

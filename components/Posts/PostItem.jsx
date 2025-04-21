@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 
-import PostActions from "./PostActions";
-import ProfileAvatar from "./ProfileAvatar";
+import ProfileAvatar from "../ProfileAvatar";
 import MediaGallery from "./MediaGallery";
+import PostActions from "./PostActions";
 
 function PostItem({
   profileImg,

@@ -2,9 +2,9 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router";
 
 import ProfileHeader from "../../components/ProfileHeader";
-import CreatePostBar from "../../components/CreatePostBar";
+import CreatePostBar from "../../components/Posts/CreatePostBar";
 import ContentContainer from "../../components/ContentContainer";
-import PostItem from "../../components/PostItem";
+import PostItem from "../../components/Posts/PostItem";
 import PagesHeader from "../../components/PagesHeader";
 import MainContainer from "../../components/MainContainer";
 
@@ -50,7 +50,7 @@ function Profile() {
                 media={contentItem.media}
                 likes={contentItem.likes}
                 time={contentItem.time}
-                link={`${post.id}/post/${contentItem.id}`}
+                link={`/${post.id}/post/${contentItem.id}`}
                 comments={contentItem.comments}
               />
             ))}

@@ -14,7 +14,7 @@ import { FaPlus } from "react-icons/fa";
 import MenuButton from "./MenuButton";
 import NavItem from "./NavItem";
 import Modal from "../UI/Modal";
-import CreatePost from "../CreatePost";
+import CreatePost from "../Posts/CreatePost";
 
 function NavMenuList() {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function NavMenuList() {
           unActive={<AiOutlineHome />}
         />
         <NavItem
-          link="search"
+          link="/search"
           active={<RiSearch2Fill />}
           unActive={<RiSearch2Line />}
         />
@@ -40,12 +40,12 @@ function NavMenuList() {
           <FaPlus />
         </MenuButton>
         <NavItem
-          link="activity"
+          link="/activity"
           active={<GoHeartFill />}
           unActive={<GoHeart />}
         />
         <NavItem
-          link="user"
+          link="/user"
           active={<RiUser3Fill />}
           unActive={<RiUser3Line />}
         />
