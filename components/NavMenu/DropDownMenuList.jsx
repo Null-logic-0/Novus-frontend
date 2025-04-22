@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import Logout from "../Authorization/Logout";
 
 function DropDownMenuList() {
   return (
@@ -7,9 +8,7 @@ function DropDownMenuList() {
         <Link to="/settings/blocked-profiles">Settings</Link>
       </li>
       <li>
-        <button className="text-red-500 font-bold cursor-pointer">
-          Log Out
-        </button>
+        <Logout />
       </li>
     </ul>
   );

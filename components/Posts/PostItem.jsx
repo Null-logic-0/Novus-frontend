@@ -15,7 +15,7 @@ function PostItem({
   link,
 }) {
   return (
-    <div className="flex items-start gap-2 ">
+    <div className="flex items-start max-md:justify-center   gap-2 ">
       <ProfileAvatar alt={name} img={profileImg} />
 
       <div className="flex flex-col p-[2px]">

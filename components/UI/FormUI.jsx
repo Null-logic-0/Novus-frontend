@@ -1,6 +1,10 @@
-function FormUI({ children, ...props }) {
+function FormUI({ children, onSubmit, ...props }) {
   return (
-    <form {...props} className="flex flex-col gap-2 items-center w-full ">
+    <form
+      {...props}
+      onSubmit={onSubmit}
+      className="flex flex-col gap-2 items-center w-full "
+    >
       {children}
     </form>
   );

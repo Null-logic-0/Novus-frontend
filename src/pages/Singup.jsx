@@ -9,8 +9,8 @@ function Signup() {
       <Helmet>
         <title>Create new account | Novus</title>
       </Helmet>
-      <div className="h-screen flex flex-col items-center justify-center gap-6 max-w-[400px] w-full mx-auto p-4">
-        <h1 className="text-4xl font-bold mb-10 tracking-widest">N O V U S</h1>
+      <div className="min-h-screen flex flex-col items-center justify-center gap-8 max-w-[400px] w-full mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold">N O V U S</h1>
 
         <SignupForm />
 
