@@ -2,14 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { modalIsVisible: false },
+  initialState: { activeModal: null },
   reducers: {
-    toggle(state) {
-      state.modalIsVisible = !state.modalIsVisible;
+    openModal(state, action) {
+      state.activeModal = action.payload;
+    },
+    closeModal(state) {
+      state.activeModal = null;
     },
   },
 });
 
-export const uiActions = uiSlice.actions;
+export const { openModal, closeModal } = uiSlice.actions;
 
 export default uiSlice;

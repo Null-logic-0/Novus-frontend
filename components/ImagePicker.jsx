@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 function ImagePicker({ name, defaultImage }) {
   const [pickedImage, setPickedImage] = useState(defaultImage || null);
   const [isImageUpdated, setIsImageUpdated] = useState(false);
-  const imageInput = useRef();
+  const imageInputRef = useRef();
 
   useEffect(() => {
     if (!isImageUpdated) {
@@ -11,75 +11,60 @@ function ImagePicker({ name, defaultImage }) {
     }
   }, [defaultImage, isImageUpdated]);
 
-  function handlePickClick() {
-    imageInput.current.click();
-  }
+  const handlePickClick = () => {
+    imageInputRef.current.click();
+  };
 
-  function handleClearImage(e) {
+  const handleClearImage = (e) => {
     e.preventDefault();
     setPickedImage(null);
     setIsImageUpdated(false);
-  }
+  };
 
-  function handleImageChange(event) {
-    const file = event.target.files[0];
-    if (!file) {
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        setPickedImage(fileReader.result);
+        setIsImageUpdated(true);
+      };
+      fileReader.readAsDataURL(file);
+    } else {
       setPickedImage(null);
       setIsImageUpdated(false);
-      return;
     }
+  };
 
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPickedImage(fileReader.result);
-      setIsImageUpdated(true);
-    };
-    fileReader.readAsDataURL(file);
-  }
+  const imageSrc = pickedImage || defaultImage;
+  const showClearButton = pickedImage && isImageUpdated;
 
   return (
     <div className="flex flex-col gap-1">
-      <div>
-        <div className="group w-[100px] h-[100px] border-[#4c5663] border-2 flex justify-center items-center text-center relative rounded-md">
-          {!pickedImage ||
-            !isImageUpdated ||
-            (defaultImage && (
-              <img
-                src={defaultImage}
-                alt="default image"
-                fill
-                sizes="max-w-[100px] max-h-[100px]"
-                className="object-cover cursor-pointer"
-                onClick={handlePickClick}
-              />
-            ))}
+      <div className="group w-25 rounded-full h-25 relative">
+        <img
+          src={imageSrc || ""}
+          alt={imageSrc ? "selected image" : "default image"}
+          className="object-cover cursor-pointer rounded-full w-25 h-25"
+          onClick={handlePickClick}
+        />
 
-          {pickedImage && (
-            <img
-              src={pickedImage}
-              alt="selected image"
-              fill
-              sizes="max-w-[100px] max-h-[100px] w-full h-full"
-              className="object-cover cursor-pointer"
-              onClick={handlePickClick}
-            />
-          )}
-          {pickedImage && isImageUpdated && (
-            <button
-              onClick={handleClearImage}
-              className="absolute z-1000 top-2 right-2 bg-gray-500 text-white font-bold text-sm w-6 h-6 rounded-full flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              X
-            </button>
-          )}
-        </div>
+        {showClearButton && (
+          <button
+            onClick={handleClearImage}
+            className="absolute z-1000 top-2 right-2 bg-gray-500 text-white font-bold cursor-pointer text-sm w-6 h-6 rounded-full flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            X
+          </button>
+        )}
       </div>
+
       <input
         className="hidden"
         type="file"
         accept="image/*"
         name={name}
-        ref={imageInput}
+        ref={imageInputRef}
         onChange={handleImageChange}
       />
 

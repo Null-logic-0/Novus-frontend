@@ -1,11 +1,13 @@
 import { twMerge } from "tailwind-merge";
 
-function Input({ className, ...props }) {
+function Input({ isTextarea, className, ...props }) {
+  const Component = isTextarea ? "textarea" : "input";
+
   return (
-    <input
+    <Component
       {...props}
       className={twMerge(
-        "bg-[#1f1f1f]  p-4 focus:border w-full  placeholder:text-[#787878] text-white rounded-xl focus:border-[#333333] focus:outline-none ",
+        "bg-[#1f1f1f]  p-4 focus:border w-full  placeholder:text-[#787878] text-white border rounded-xl focus:border-white border-[#333333] focus:outline-none selection:bg-transparent",
         className
       )}
     />

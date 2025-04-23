@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "../../src/store/UI-slice";
+import { closeModal, openModal } from "../../src/store/UI-slice";
+import { useAuth } from "../../hooks/useAuth";
 
 import Button from "../UI/Button";
 import Input from "../UI/Input";
@@ -8,36 +9,45 @@ import Modal from "../UI/Modal";
 import CreatePost from "./CreatePost";
 
 function CreatePostBar() {
-  const showModal = useSelector((state) => state.ui.modalIsVisible);
+  const { userData } = useAuth();
+
+  const showModal = useSelector((state) => state.ui.activeModal);
   const dispatch = useDispatch();
 
-  const toggleModalHandler = () => {
-    dispatch(uiActions.toggle());
+  const openModalHandler = () => {
+    dispatch(openModal("createPost"));
+  };
+  const closeModalHandler = () => {
+    dispatch(closeModal("createPost"));
   };
 
   return (
     <>
       <div className="flex items-center justify-between p-4 max-md:hidden">
         <div className="flex items-center w-full">
-          <ProfileAvatar link="user" alt={"user"} />
+          <ProfileAvatar
+            link="user"
+            alt={`${userData?.data?.user?.fullName}-avatar`}
+            img={userData?.data?.user?.profileImage}
+          />
           <Input
             className="bg-transparent border-none w-full"
             placeholder="What's new ?"
             readOnly
-            onClick={toggleModalHandler}
+            onClick={openModalHandler}
           />
         </div>
         <Button
           className="border-2 border-[#333333] text-white bg-[#171717] max-w-16 p-2"
-          onClick={toggleModalHandler}
+          onClick={openModalHandler}
         >
           Post
         </Button>
       </div>
 
-      {showModal && (
-        <Modal onClose={toggleModalHandler}>
-          <CreatePost onCancel={toggleModalHandler} />
+      {showModal === "createPost" && (
+        <Modal onClose={closeModalHandler}>
+          <CreatePost onCancel={closeModalHandler} />
         </Modal>
       )}
     </>

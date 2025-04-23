@@ -49,9 +49,7 @@ export async function logout() {
   return true;
 }
 
-export async function getMe() {
-  const token = useSelector((state) => state.auth.token);
-
+export async function getMe(token) {
   if (!token) {
     throw new Error("No token found. Please log in.");
   }
@@ -63,15 +61,38 @@ export async function getMe() {
     credentials: "include",
   });
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
-    const error = new Error(message);
+    const error = new Error(data?.message);
     error.code = response.status;
     error.info = data;
     throw error;
   }
   return data;
+}
+
+export async function updateMe({ token, data }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/users/updateMe`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: data,
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Update failed!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
 }
 
 // export async function signup(user) {

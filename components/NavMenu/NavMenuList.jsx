@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "../../src/store/UI-slice";
+import { closeModal, openModal } from "../../src/store/UI-slice";
 
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineHome } from "react-icons/ai";
@@ -18,10 +18,14 @@ import CreatePost from "../Posts/CreatePost";
 
 function NavMenuList() {
   const dispatch = useDispatch();
-  const showModal = useSelector((state) => state.ui.modalIsVisible);
+  const showModal = useSelector((state) => state.ui.activeModal);
 
-  const toggleModalHandler = () => {
-    dispatch(uiActions.toggle());
+  const openModalHandler = () => {
+    dispatch(openModal("createPost"));
+  };
+
+  const closeModalHandler = () => {
+    dispatch(closeModal("createPost"));
   };
   return (
     <>
@@ -36,7 +40,7 @@ function NavMenuList() {
           active={<RiSearch2Fill />}
           unActive={<RiSearch2Line />}
         />
-        <MenuButton onClick={toggleModalHandler}>
+        <MenuButton onClick={openModalHandler}>
           <FaPlus />
         </MenuButton>
         <NavItem
@@ -50,9 +54,9 @@ function NavMenuList() {
           unActive={<RiUser3Line />}
         />
       </ul>
-      {showModal && (
-        <Modal onClose={toggleModalHandler}>
-          <CreatePost onCancel={toggleModalHandler} />
+      {showModal === "createPost" && (
+        <Modal onClose={closeModalHandler}>
+          <CreatePost onCancel={closeModalHandler} />
         </Modal>
       )}
     </>

@@ -9,9 +9,11 @@ const authSlice = createSlice({
   reducers: {
     setAuth(state, action) {
       state.token = action.payload.token;
+      document.cookie = `token=${action.payload.token}`;
     },
     clearAuth(state) {
       state.token = null;
+      document.cookie = "token=";
     },
   },
 });
