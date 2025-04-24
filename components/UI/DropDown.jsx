@@ -12,7 +12,7 @@ export default function Dropdown({ options }) {
       id="dropdown"
       value={selected}
       onChange={handleChange}
-      className="font-semibold focus:outline-none"
+      className="font-semibold focus:outline-none cursor-pointer"
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>

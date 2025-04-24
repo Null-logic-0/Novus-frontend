@@ -5,6 +5,7 @@ import MediaGallery from "./MediaGallery";
 import PostActions from "./PostActions";
 import PostDropdownMenu from "./PostDropdownMenu";
 import { formatPostDate } from "../../helper/formatDate";
+import { useAuth } from "../../hooks/useAuth";
 
 function PostItem({
   profileImg,
@@ -18,6 +19,7 @@ function PostItem({
   userId,
   postId,
 }) {
+  const { userData } = useAuth();
   return (
     <div className="flex justify-between w-full items-start">
       <div className="flex items-start max-md:justify-center w-full  gap-2 ">
@@ -38,7 +40,9 @@ function PostItem({
           <PostActions likes={likes} comments={comments} link={link} />
         </div>
       </div>
-      <PostDropdownMenu postId={postId} />
+      {userData?.data?.user?._id === userId && (
+        <PostDropdownMenu postId={postId} />
+      )}
     </div>
   );
 }

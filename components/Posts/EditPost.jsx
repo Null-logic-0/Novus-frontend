@@ -24,6 +24,7 @@ function EditPost({ onCancel, postId }) {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["me"] });
       await queryClient.invalidateQueries({ queryKey: ["post", postId] });
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
       onCancel();
     },
   });

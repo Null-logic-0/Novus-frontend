@@ -11,6 +11,7 @@ function DeletePost({ onCancel, postId }) {
     mutationFn: ({ token }) => deletePost({ token, id: postId }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["me"] });
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
       await queryClient.invalidateQueries({ queryKey: ["post", postId] });
       onCancel();
     },

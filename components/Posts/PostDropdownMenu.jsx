@@ -30,7 +30,7 @@ function PostDropdownMenu({ postId }) {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative ">
         <DropdownMenu
           icon={<HiDotsHorizontal />}
           modalId={`post-menu-${postId}`}

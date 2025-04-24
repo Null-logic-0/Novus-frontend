@@ -1,5 +1,4 @@
 import { FaRegComment } from "react-icons/fa";
-import { TbShare2 } from "react-icons/tb";
 
 import { GoHeart } from "react-icons/go";
 import { GoHeartFill } from "react-icons/go";
@@ -35,9 +34,6 @@ function PostActions({ likes, comments, link }) {
       >
         <FaRegComment />
         <span className="text-[12px] font-semibold">{comments}</span>
-      </button>
-      <button className="cursor-pointer text-xl">
-        <TbShare2 />
       </button>
     </div>
   );

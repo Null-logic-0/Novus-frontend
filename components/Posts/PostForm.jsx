@@ -7,6 +7,7 @@ import MediaFilesPreview from "./MediaFilesPreview";
 function PostForm({ onCancel, onSubmit, isPending }) {
   const fileInputRef = useRef(null);
   const [mediaFiles, setMediaFiles] = useState([]);
+  const [caption, setCaption] = useState("");
 
   const handleFileUploadClick = () => {
     fileInputRef.current?.click();
@@ -37,6 +38,8 @@ function PostForm({ onCancel, onSubmit, isPending }) {
       <textarea
         name="caption"
         placeholder="What's new?"
+        value={caption}
+        onChange={(e) => setCaption(e.target.value)}
         className="w-full resize-none outline-none text-white bg-transparent"
       />
 
@@ -64,7 +67,7 @@ function PostForm({ onCancel, onSubmit, isPending }) {
       </button>
 
       <div className="flex gap-2 justify-end items-center w-full mt-2">
-        {!isPending && (
+        {(caption.trim() || mediaFiles.length > 0) && !isPending && (
           <>
             <Button
               type="button"

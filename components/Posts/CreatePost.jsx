@@ -15,6 +15,7 @@ function CreatePost({ onCancel }) {
     mutationFn: createPost,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
       dispatch(closeModal("createPost"));
     },
   });

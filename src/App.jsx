@@ -30,8 +30,9 @@ const router = createBrowserRouter([
       { path: "search", element: <Search /> },
       { path: "activity", element: <Activity /> },
       { path: ":slug", element: <Profile /> },
-      { path: ":userId/post/:postId", element: <Post /> },
+      { path: "posts/:userId/post/:postId", element: <Post /> },
       { path: ":userId/post/:postId/media", element: <Media /> },
+      { path: ":userId/post/:postId/comment", element: <p>test</p> },
       {
         path: "settings",
         element: <SettingsRoot />,
