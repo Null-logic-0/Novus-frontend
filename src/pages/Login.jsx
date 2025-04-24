@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Helmet } from "react-helmet";
+import { HeadProvider, Title } from "react-head";
 
 import NavigationButton from "../../components/UI/NavigationButton";
 import LoginForm from "../../components/Authorization/LoginForm";
@@ -7,9 +7,9 @@ import LoginForm from "../../components/Authorization/LoginForm";
 function Login() {
   return (
     <>
-      <Helmet>
-        <title>Login | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>Login | Novus</Title>
+      </HeadProvider>
       <div className="min-h-screen flex flex-col items-center justify-center gap-6 max-w-[400px] w-full mx-auto p-4">
         <h1 className="text-4xl font-bold">N O V U S</h1>
         <LoginForm />

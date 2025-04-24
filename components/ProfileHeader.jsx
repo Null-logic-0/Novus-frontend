@@ -51,7 +51,7 @@ function ProfileHeader({ userData }) {
       </div>
       {activeModal === "editProfile" && (
         <Modal onClose={closeModalHandler}>
-          <EditProfile />
+          <EditProfile onClose={closeModalHandler} />
         </Modal>
       )}
     </>

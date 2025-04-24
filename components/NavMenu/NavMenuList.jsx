@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../hooks/useAuth";
 import { closeModal, openModal } from "../../src/store/UI-slice";
 
 import { AiFillHome } from "react-icons/ai";
@@ -17,6 +18,7 @@ import Modal from "../UI/Modal";
 import CreatePost from "../Posts/CreatePost";
 
 function NavMenuList() {
+  const { userData } = useAuth();
   const dispatch = useDispatch();
   const showModal = useSelector((state) => state.ui.activeModal);
 
@@ -49,7 +51,7 @@ function NavMenuList() {
           unActive={<GoHeart />}
         />
         <NavItem
-          link="/user"
+          link={`/${userData?.data.user._id}`}
           active={<RiUser3Fill />}
           unActive={<RiUser3Line />}
         />

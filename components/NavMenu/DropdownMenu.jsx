@@ -1,49 +1,47 @@
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
-
 import MainContainer from "../MainContainer";
 import MenuButton from "./MenuButton";
-import { Link } from "react-router";
-import { useEffect, useRef, useState } from "react";
-import DropDownMenuList from "./DropDownMenuList";
+import { useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal, openModal } from "../../src/store/UI-slice";
 
-function DropdownMenu({ className }) {
-  const [showModal, setShowModal] = useState(false);
+function DropdownMenu({ className, children, icon, modalId }) {
   const menuRef = useRef(null);
+  const dispatch = useDispatch();
+  const activeModal = useSelector((state) => state.ui.activeModal);
 
-  function toggleShowModleHandler() {
-    setShowModal(!showModal);
-  }
+  const openDropdownMenuHandler = () => {
+    dispatch(openModal(modalId));
+  };
 
   useEffect(() => {
-    function handleClickOutside(e) {
+    const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setShowModal(false);
+        dispatch(closeModal(modalId));
       }
-    }
+    };
 
-    if (showModal) {
+    if (activeModal === modalId) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showModal]);
+  }, [dispatch, modalId, activeModal]);
 
   return (
     <div ref={menuRef}>
-      <MenuButton className="relative" onClick={toggleShowModleHandler}>
-        <HiOutlineMenuAlt2 />
+      <MenuButton className="relative" onClick={openDropdownMenuHandler}>
+        {icon}
       </MenuButton>
 
-      {showModal && (
+      {activeModal === modalId && (
         <MainContainer className={twMerge("w-40 h-25", className)}>
-          <DropDownMenuList />
+          <ul className="flex flex-col gap-4 px-6 py-4">{children}</ul>
         </MainContainer>
       )}
     </div>
   );
 }
-
 export default DropdownMenu;

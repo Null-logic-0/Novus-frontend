@@ -95,6 +95,123 @@ export async function updateMe({ token, data }) {
   return result;
 }
 
+export async function getPosts(token) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to fetch posts!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function getSinglePost({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message);
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function createPost({ token, data }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: data,
+    credentials: "include",
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Post creation failed!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function updatePost({ token, data, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+  const response = await fetch(`${URL}/posts/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: data,
+    credentials: "include",
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Post updated failed!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result.data;
+}
+
+export async function deletePost({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    const error = new Error(result?.message || "Failed to delete the post.");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return { success: true, message: "Post deleted successfully." };
+}
+
 // export async function signup(user) {
 //   const response = await fetch(`${URL}/users/signup`, {
 //     method: "POST",

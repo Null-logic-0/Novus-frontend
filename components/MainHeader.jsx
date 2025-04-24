@@ -1,3 +1,7 @@
+import { Link } from "react-router";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
+
+import Logout from "./Authorization/Logout";
 import Logo from "./Logo";
 import DropdownMenu from "./NavMenu/DropdownMenu";
 
@@ -8,7 +12,18 @@ function MainHeader() {
         <Logo />
       </div>
       <div className="flex items-center justify-end p-4 w-full ">
-        <DropdownMenu className="absolute right-10  max-md:bg-[#171717] max-md:rounded-2xl" />
+        <DropdownMenu
+          modalId="dropdown"
+          className="absolute right-10  max-md:bg-[#171717] max-md:rounded-2xl"
+          icon={<HiOutlineMenuAlt2 />}
+        >
+          <li>
+            <Link to="/settings/blocked-profiles">Settings</Link>
+          </li>
+          <li>
+            <Logout />
+          </li>
+        </DropdownMenu>
       </div>
     </header>
   );

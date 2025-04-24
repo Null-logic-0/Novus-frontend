@@ -7,12 +7,9 @@ import Button from "./UI/Button";
 import FormUI from "./UI/FormUI";
 import Input from "./UI/Input";
 import ErrorBlock from "./UI/ErrorBlock";
-import { useDispatch } from "react-redux";
-import { closeModal } from "../src/store/UI-slice";
 
-function EditProfile() {
+function EditProfile({ onClose }) {
   const { userData, token } = useAuth();
-  const dispatch = useDispatch();
 
   const profileImage = userData?.data?.user?.profileImage;
   const userDefaultImage =
@@ -22,9 +19,9 @@ function EditProfile() {
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: updateMe,
-    onSuccess: () => {
-      dispatch(closeModal("editProfile"));
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["me"] });
+      onClose();
     },
   });
 
@@ -32,8 +29,6 @@ function EditProfile() {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-
-    console.log("TOKEN:", token);
 
     mutate({ data: formData, token });
   }

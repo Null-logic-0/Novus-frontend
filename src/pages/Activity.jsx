@@ -1,7 +1,7 @@
-import { Helmet } from "react-helmet";
 import PagesHeader from "../../components/PagesHeader";
 import UserList from "../../components/UserList";
 import MainContainer from "../../components/MainContainer";
+import { HeadProvider, Title } from "react-head";
 
 const USER = [
   {
@@ -24,9 +24,9 @@ const options = [
 function Activity() {
   return (
     <>
-      <Helmet>
-        <title>Activity | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>Activity | Novus</Title>
+      </HeadProvider>
       <PagesHeader dropDown={true} options={options} />
       <MainContainer>
         <section className="px-6 py-4">

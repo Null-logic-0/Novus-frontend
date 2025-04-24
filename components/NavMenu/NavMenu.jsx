@@ -1,6 +1,10 @@
+import { Link } from "react-router";
 import NavMenuList from "./NavMenuList";
 import Logo from "../Logo";
 import DropdownMenu from "./DropdownMenu";
+import Logout from "../Authorization/Logout";
+
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
 function NavMenu() {
   return (
@@ -8,7 +12,18 @@ function NavMenu() {
       <Logo className="max-md:hidden ml-2" />
       <NavMenuList />
       <div className="max-md:hidden">
-        <DropdownMenu className="absolute bottom-18 left-5" />
+        <DropdownMenu
+          modalId="dropdown"
+          className="absolute bottom-18 left-5"
+          icon={<HiOutlineMenuAlt2 />}
+        >
+          <li>
+            <Link to="/settings/blocked-profiles">Settings</Link>
+          </li>
+          <li>
+            <Logout />
+          </li>
+        </DropdownMenu>
       </div>
     </nav>
   );

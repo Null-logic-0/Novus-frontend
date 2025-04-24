@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { HeadProvider, Title } from "react-head";
 import UserList from "../../components/UserList";
 
 const USER = [
@@ -15,9 +15,9 @@ const USER = [
 function BlockedProfiles() {
   return (
     <>
-      <Helmet>
-        <title>Blocked Profiles | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>Blocked Profiles | Novus</Title>
+      </HeadProvider>
       <div className="flex flex-col gap-4">
         <h2 className="font-semibold opacity-50">Blocked Users</h2>
         <hr className="border-[#4d4d4d]" />

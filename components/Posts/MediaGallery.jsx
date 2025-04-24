@@ -6,11 +6,13 @@ function MediaGallery({ media }) {
   const [minHeight, setMinHeight] = useState(null);
   const [muted, setMuted] = useState(true);
 
-  const images = media.filter(
+  const safeMedia = Array.isArray(media) ? media : [];
+
+  const images = safeMedia.filter(
     (file) => typeof file === "string" && file.match(/\.(jpg|png|jpeg)$/i)
   );
 
-  const videos = media.filter(
+  const videos = safeMedia.filter(
     (file) =>
       typeof file === "string" &&
       (file.match(/\.(mp4|mov)$/i) || file.startsWith("blob:"))

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { HeadProvider, Title } from "react-head";
 import FormUI from "../../components/UI/FormUI";
 import Input from "../../components/UI/Input";
 import Button from "../../components/UI/Button";
@@ -6,9 +6,9 @@ import Button from "../../components/UI/Button";
 function Account() {
   return (
     <>
-      <Helmet>
-        <title>Account | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>Account | Novus</Title>
+      </HeadProvider>
       <div className="flex flex-col gap-4">
         <h2 className="font-semibold opacity-50">Update password</h2>
         <FormUI>

@@ -1,10 +1,9 @@
-import { Helmet } from "react-helmet";
-
 import PagesHeader from "../../components/PagesHeader";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/Posts/PostItem";
 import MainContainer from "../../components/MainContainer";
 import CreatePostBar from "../../components/Posts/CreatePostBar";
+import { HeadProvider, Title } from "react-head";
 
 const POSTS = [
   {
@@ -33,9 +32,9 @@ const options = [
 function Posts() {
   return (
     <>
-      <Helmet>
-        <title>Home | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>Home | Novus</Title>
+      </HeadProvider>
       <PagesHeader dropDown={true} options={options} />
       <MainContainer>
         <CreatePostBar />

@@ -1,6 +1,3 @@
-import { Helmet } from "react-helmet";
-import { useParams } from "react-router";
-
 import { useAuth } from "../../hooks/useAuth";
 import ProfileHeader from "../../components/ProfileHeader";
 import CreatePostBar from "../../components/Posts/CreatePostBar";
@@ -9,16 +6,16 @@ import PostItem from "../../components/Posts/PostItem";
 import PagesHeader from "../../components/PagesHeader";
 import MainContainer from "../../components/MainContainer";
 import { MdContentPasteOff } from "react-icons/md";
+import { HeadProvider, Title } from "react-head";
 
 function Profile() {
   const { userData } = useAuth();
 
-  const params = useParams();
   return (
     <>
-      <Helmet>
-        <title>{params.slug} | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>User Profile | Novus</Title>
+      </HeadProvider>
       <PagesHeader title="Profile" />
 
       <MainContainer>
@@ -26,21 +23,22 @@ function Profile() {
         <hr className="border-[#4d4d4d]" />
 
         <CreatePostBar />
-        {userData?.data?.user?.posts?.length > 0 ? (
-          userData?.data?.user?.posts.map((post) => (
-            <ContentContainer key={post.id}>
-              {post.content.map((contentItem) => (
-                <PostItem
-                  key={contentItem.id}
-                  name={post.name}
-                  caption={contentItem.caption}
-                  media={contentItem.media}
-                  likes={contentItem.likes}
-                  time={contentItem.time}
-                  link={`/${post.id}/post/${contentItem.id}`}
-                  comments={contentItem.comments}
-                />
-              ))}
+        {userData?.data?.user?.postsVirtual?.length > 0 ? (
+          userData?.data?.user?.postsVirtual.map((post) => (
+            <ContentContainer key={post._id}>
+              <PostItem
+                userId={post.user._id}
+                postId={post._id}
+                key={post._id}
+                profileImg={post.user.profileImage}
+                name={post.user.fullName}
+                caption={post.caption}
+                media={post.media}
+                likes={post.likes}
+                date={post.createdAt}
+                link={`/${post._id}/post`}
+                comments={post.comments}
+              />
             </ContentContainer>
           ))
         ) : (

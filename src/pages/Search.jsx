@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet";
 import PagesHeader from "../../components/PagesHeader";
 import SearchInput from "../../components/SearchInput";
 import UserList from "../../components/UserList";
 import MainContainer from "../../components/MainContainer";
+import { HeadProvider, Title } from "react-head";
 
 const USER = [
   {
@@ -18,9 +18,9 @@ const USER = [
 function Search() {
   return (
     <>
-      <Helmet>
-        <title>Search | Novus</title>
-      </Helmet>
+      <HeadProvider>
+        <Title>Search | Novus</Title>
+      </HeadProvider>
       <PagesHeader title={"Search"} />
       <MainContainer>
         <div className="p-6">
