@@ -1,24 +1,18 @@
-import { FaRegComment } from "react-icons/fa";
-
-import { GoHeart } from "react-icons/go";
-import { GoHeartFill } from "react-icons/go";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { FaRegComment } from "react-icons/fa";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 
-function PostActions({ likes, link }) {
+function CommentActions({ setParentCommentId, commentId, likes }) {
   const [isLiked, setIsLiked] = useState(false);
-  const navigate = useNavigate();
 
   function handleLike() {
     setIsLiked(!isLiked);
   }
-
-  function handleNavigate() {
-    navigate(link);
-  }
-
+  const handleReply = () => {
+    setParentCommentId(commentId);
+  };
   return (
-    <div className="flex gap-4 items-center justify-start pt-4">
+    <div className="flex items-center gap-2">
       <button
         className={`cursor-pointer text-xl flex items-center gap-2 ${
           isLiked ? "text-red-500 transition-all" : undefined
@@ -29,8 +23,8 @@ function PostActions({ likes, link }) {
         <span className="text-[12px] font-semibold">{likes}</span>
       </button>
       <button
-        className="cursor-pointer text-xl flex items-center gap-2"
-        onClick={handleNavigate}
+        onClick={() => handleReply(commentId)}
+        className="text-xl text-white font-semibold cursor-pointer"
       >
         <FaRegComment />
       </button>
@@ -38,4 +32,4 @@ function PostActions({ likes, link }) {
   );
 }
 
-export default PostActions;
+export default CommentActions;

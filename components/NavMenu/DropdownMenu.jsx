@@ -32,7 +32,10 @@ function DropdownMenu({ className, children, icon, modalId }) {
 
   return (
     <div ref={menuRef}>
-      <MenuButton className="relative" onClick={openDropdownMenuHandler}>
+      <MenuButton
+        className="relative text-lg opacity-50 hover:opacity-100"
+        onClick={openDropdownMenuHandler}
+      >
         {icon}
       </MenuButton>
 

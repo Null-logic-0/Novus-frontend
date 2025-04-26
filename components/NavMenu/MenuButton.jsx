@@ -5,7 +5,7 @@ function MenuButton({ className, children, ...props }) {
     <button
       {...props}
       className={twMerge(
-        "hover:bg-[#171717] p-2 cursor-pointer flex justify-center items-center rounded-lg text-2xl max-md:text-xl",
+        "hover:bg-[#171717] p-2 cursor-pointer flex justify-center items-center rounded-lg text-xl max-md:text-xl",
         className
       )}
     >

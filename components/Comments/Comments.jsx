@@ -1,17 +1,19 @@
 import ContentContainer from "../ContentContainer";
-import PostActions from "../Posts/PostActions";
-import ProfileAvatar from "../ProfileAvatar";
+import CommentItem from "./CommentItem";
 
-function Comments() {
+function Comments({ comments, setParentCommentId }) {
   return (
-    <ContentContainer className="flex items-start gap-3">
-      <ProfileAvatar alt={`-profile avatar`} />
-      <div className="flex flex-col gap-2">
-        <p>userName</p>
-        <p>text</p>
-        <PostActions />
-      </div>
-    </ContentContainer>
+    <div className="flex flex-col gap-4 w-full">
+      {comments?.map((comment) => (
+        <ContentContainer key={comment._id}>
+          <CommentItem
+            comment={comment}
+            commentId={comment._id}
+            setParentCommentId={setParentCommentId}
+          />
+        </ContentContainer>
+      ))}
+    </div>
   );
 }
 

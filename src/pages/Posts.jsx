@@ -33,7 +33,7 @@ function Posts() {
   return (
     <>
       <HeadProvider>
-        <Title>Home | Novus</Title>
+        <Title>Posts | Novus</Title>
       </HeadProvider>
       <div className="w-full justify-center mx-0 gap-5 flex flex-col items-center">
         <PagesHeader dropDown={true} options={options} />
@@ -56,7 +56,6 @@ function Posts() {
                     likes={post.likes}
                     date={post.createdAt}
                     link={`posts/${post.user._id}/post/${post._id}`}
-                    comments={post.comments}
                   />
                 </ContentContainer>
               ))

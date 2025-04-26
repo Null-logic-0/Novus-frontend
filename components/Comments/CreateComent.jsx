@@ -1,28 +1,51 @@
-import { IoSend } from "react-icons/io5";
-import Button from "../UI/Button";
-import FormUI from "../UI/FormUI";
-import Input from "../UI/Input";
-import MainContainer from "../MainContainer";
+import { useMutation } from "@tanstack/react-query";
+import { useAuth } from "../../hooks/useAuth";
+import CommentForm from "./CommentForm";
+import { createComment, queryClient } from "../../util/http";
+import toast from "react-hot-toast";
 
-function CreateComent({ placeholder }) {
+function CreateComent({ placeholder, postId, parentCommentId }) {
+  const { token } = useAuth();
+
+  const { mutate } = useMutation({
+    mutationFn: ({ formData }) => {
+      return toast.promise(createComment({ token, postId, data: formData }), {
+        loading: "Posting comment...",
+        success: "Comment created successfully!",
+        error: (err) => err.info?.message || "Failed to create comment!",
+      });
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["post", postId] });
+      queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+    },
+  });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(event.target);
+    const text = formData.get("text");
+
+    const data = {
+      text,
+      ...(parentCommentId && { parentComment: parentCommentId }),
+    };
+
+    mutate(
+      { formData: data },
+      {
+        onSuccess: () => {
+          form.reset();
+        },
+      }
+    );
+  }
+
   return (
-    <div className="border bg-[#000000]  border-[#383838] p-4 rounded-none w-full">
-      <FormUI className="w-full">
-        <div className="w-full flex items-center relative">
-          <Input
-            placeholder={`Reply to ${placeholder}...`}
-            isTextarea
-            name="text"
-            className="py-2 pl-5  resize-none border-2  rounded-full h-10 w-full text-white"
-          />
-          <button
-            type="submit"
-            className="absolute right-3 cursor-pointer text-white text-lg p-0 opacity-60 hover:opacity-100"
-          >
-            <IoSend />
-          </button>
-        </div>
-      </FormUI>
+    <div className="border bg-[#000000] border-[#383838] p-4 rounded-none w-full">
+      <CommentForm placeholder={placeholder} onSubmit={handleSubmit} />
     </div>
   );
 }

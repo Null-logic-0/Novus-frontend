@@ -1,46 +1,52 @@
 import { useRef } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-
+import { getSingleComment, queryClient, updateComment } from "../../util/http";
 import { useAuth } from "../../hooks/useAuth";
-import { getSinglePost, queryClient, updatePost } from "../../util/http";
 
 import ProfileAvatar from "../ProfileAvatar";
 import Button from "../UI/Button";
-import MediaGallery from "./MediaGallery";
 import ErrorBlock from "../UI/ErrorBlock";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
-function EditPost({ onCancel, postId }) {
+function EditComment({ onCancel, commentId }) {
   const { userData, token } = useAuth();
   const captionRef = useRef();
+  console.log(commentId, "xd");
 
-  const { data: postData, isPending: postIsLoading } = useQuery({
-    queryKey: ["post", postId],
-    queryFn: () => getSinglePost({ id: postId, token }),
-    enabled: !!postId,
+  const { data: commentData, isPending: commentIsLoading } = useQuery({
+    queryKey: ["comment", commentId],
+    queryFn: () => getSingleComment({ id: commentId, token }),
+    enabled: !!commentId,
   });
   const { isError, error, isPending, mutate } = useMutation({
-    mutationFn: ({ id, token, data }) => updatePost({ id, token, data }),
+    mutationFn: ({ id, token, data }) => updateComment({ id, token, data }),
 
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["me"] });
-      await queryClient.invalidateQueries({ queryKey: ["post", postId] });
-      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      await queryClient.invalidateQueries({ queryKey: ["comments"] });
+      await queryClient.invalidateQueries({ queryKey: ["comment", commentId] });
+
       onCancel();
+      toast.success("Comment Updated successfully!");
     },
   });
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("caption", captionRef.current.value);
-    mutate({ token, data: formData, id: postId });
+    const data = {
+      text: captionRef.current.value,
+    };
+
+    mutate({ token, data, id: commentId });
   }
 
-  if (postIsLoading) {
-    return <p className="text-white text-center text-xl">Post is Loading...</p>;
+  if (commentIsLoading) {
+    return (
+      <p className="text-white text-center text-lg font-semibold opacity-50">
+        Comment is Loading...
+      </p>
+    );
   }
-
   return (
     <div className="flex items-start max-md:justify-center w-full  gap-2 ">
       <ProfileAvatar
@@ -55,12 +61,10 @@ function EditPost({ onCancel, postId }) {
         <form className="flex flex-col p-[2px] gap-2" onSubmit={handleSubmit}>
           <textarea
             ref={captionRef}
-            name="caption"
-            placeholder="What's new?"
+            name="text"
             className="w-full resize-none outline-none text-white bg-transparent"
-            defaultValue={postData?.data?.post?.caption ?? ""}
+            defaultValue={commentData?.data?.comment?.text ?? ""}
           />
-          <MediaGallery media={postData?.data?.post?.media || []} />
           <div className="flex gap-2 justify-end items-center w-full pt-4">
             {!isPending && (
               <>
@@ -76,14 +80,14 @@ function EditPost({ onCancel, postId }) {
             )}
             {isPending && (
               <p className="opacity-50 font-semibold text-white">
-                Please wait,Post is updating...
+                Please wait,comment is updating...
               </p>
             )}
           </div>
           {isError && (
             <>
               <ErrorBlock
-                title="Failed to update post data!"
+                title="Failed to update comment data!"
                 message={error.info?.message || "Invalid data provided"}
               />
             </>
@@ -94,4 +98,4 @@ function EditPost({ onCancel, postId }) {
   );
 }
 
-export default EditPost;
+export default EditComment;

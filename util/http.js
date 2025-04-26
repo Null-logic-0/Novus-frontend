@@ -212,46 +212,128 @@ export async function deletePost({ token, id }) {
   return { success: true, message: "Post deleted successfully." };
 }
 
-// export async function signup(user) {
-//   const response = await fetch(`${URL}/users/signup`, {
-//     method: "POST",
-//     body: JSON.stringify(user),
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     credentials: "include",
-//   });
+export async function createComment({ token, data, postId }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
 
-//   const { signupUser } = await response.json();
+  const response = await fetch(`${URL}/posts/${postId}/comments`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    credentials: "include",
+  });
 
-//   if (!response.ok) {
-//     const error = new Error("An error occurred while creating the account");
-//     error.code = response.status;
-//     error.info = signupUser;
-//     throw error;
-//   }
+  const result = await response.json();
 
-//   return signupUser;
-// }
+  if (!response.ok) {
+    const error = new Error(result?.message || "Comment creation failed!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
 
-// export async function login(user) {
-//   const response = await fetch(`${URL}/users/login`, {
-//     method: "POST",
-//     body: JSON.stringify(user),
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     credentials: "include",
-//   });
+export async function getComments({ token, postId }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
 
-//   const { loginUser } = await response.json();
+  const response = await fetch(`${URL}/posts/${postId}/comments`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
 
-//   if (!response.ok) {
-//     const error = new Error("An error occurred while logged in!");
-//     error.code = response.status;
-//     error.info = loginUser;
-//     throw error;
-//   }
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to fetch comments!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
 
-//   return loginUser;
-// }
+export async function getSingleComment({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts/comments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Fetch Comment Failed!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function updateComment({ token, id, data }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+  const response = await fetch(`${URL}/posts/comments/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+
+    credentials: "include",
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Comment updated failed!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result.data;
+}
+
+export async function deleteComment({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts/comments/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    const error = new Error(result?.message || "Failed to delete the comment.");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return { success: true, message: "Comment deleted successfully." };
+}

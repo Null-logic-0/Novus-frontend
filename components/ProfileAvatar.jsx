@@ -7,14 +7,16 @@ function ProfileAvatar({ link, img, alt, className }) {
     <>
       {link ? (
         <Link to={link}>
-          <img
-            src={img || defaultImg}
-            alt={alt}
-            className={twMerge(
-              "object-cover w-10 h-10 rounded-full",
-              className
-            )}
-          />
+          <div>
+            <img
+              src={img || defaultImg}
+              alt={alt}
+              className={twMerge(
+                "object-cover w-10 h-10  rounded-full",
+                className
+              )}
+            />
+          </div>
         </Link>
       ) : (
         <img

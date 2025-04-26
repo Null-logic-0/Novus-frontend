@@ -4,19 +4,16 @@ import PostForm from "./PostForm";
 import { useMutation } from "@tanstack/react-query";
 import { createPost, queryClient } from "../../util/http";
 import ErrorBlock from "../UI/ErrorBlock";
-import { useDispatch } from "react-redux";
-import { closeModal } from "../../src/store/UI-slice";
 
 function CreatePost({ onCancel }) {
   const { userData, token } = useAuth();
-  const dispatch = useDispatch();
 
   const { mutate, isError, error, isPending } = useMutation({
     mutationFn: createPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-      dispatch(closeModal("createPost"));
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["me"] });
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      onCancel();
     },
   });
 

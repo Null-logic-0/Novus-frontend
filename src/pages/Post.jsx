@@ -11,8 +11,7 @@ import LoadingIndicator from "../../components/UI/LoadingIndicator";
 import { useParams } from "react-router";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/Posts/PostItem";
-import CreateComent from "../../components/Comments/CreateComent";
-import Comments from "../../components/Comments/Comments";
+import PostComments from "../../components/Comments/PostComments";
 
 function Post() {
   const { postId } = useParams();
@@ -50,11 +49,12 @@ function Post() {
                 media={post?.media}
                 likes={post?.likes}
                 date={post?.createdAt}
-                comments={post?.comments}
               />
             </ContentContainer>
-            <Comments />
-            <CreateComent placeholder={post?.user?.fullName} />
+            <PostComments
+              postId={post?._id}
+              post={post?.user?.fullName ?? ""}
+            />
           </MainContainer>
         ) : (
           <div className="flex items-center justify-center">

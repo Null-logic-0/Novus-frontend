@@ -1,4 +1,7 @@
+import { createBrowserRouter } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router/dom";
+import { Toaster } from "react-hot-toast";
 import { queryClient } from "../util/http.js";
 
 import Posts from "./pages/Posts.jsx";
@@ -14,8 +17,6 @@ import SettingsRoot from "./pages/SettingsRoot.jsx";
 import BlockedProfiles from "./pages/BlockedProfiles.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectRoutes from "../components/Authorization/ProtectRoutes.jsx";
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <Toaster position="bottom-center" toastOptions={{ duration: 3000 }} />
       <RouterProvider router={router} />
     </QueryClientProvider>
   );
