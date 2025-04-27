@@ -12,7 +12,7 @@ import { useSinglePost } from "../../hooks/useSinglePost";
 
 function Post() {
   const { postId } = useParams();
-  const { data: postData, isError, error, isPending } = useSinglePost(postId);
+  const { post: postData, isError, error, isPending } = useSinglePost(postId);
 
   const post = postData?.data?.post;
   const userId = Number(post?.user?._id);

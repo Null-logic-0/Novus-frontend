@@ -6,7 +6,7 @@ import { closeModal, openModal } from "../src/store/UI-slice";
 import Modal from "./UI/Modal";
 import EditProfile from "./EditProfile";
 
-function ProfileHeader({ userData }) {
+function ProfileHeader({ userData, currentUser }) {
   const followers = userData?.data?.user?.followers?.length ?? 0;
   const activeModal = useSelector((state) => state.ui.activeModal);
 
@@ -42,12 +42,16 @@ function ProfileHeader({ userData }) {
             alt={`${userData?.data?.user?.fullName}-avatar`}
           />
         </div>
-        <Button
-          className="border-2 border-[#333333] text-white "
-          onClick={openModalHandler}
-        >
-          Edit Profile
-        </Button>
+        {currentUser ? (
+          <Button
+            className="border-2 border-[#333333] text-white "
+            onClick={openModalHandler}
+          >
+            Edit Profile
+          </Button>
+        ) : (
+          <p>follow</p>
+        )}
       </div>
       {activeModal === "editProfile" && (
         <Modal onClose={closeModalHandler}>
