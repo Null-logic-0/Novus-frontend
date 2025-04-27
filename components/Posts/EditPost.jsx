@@ -8,6 +8,7 @@ import ProfileAvatar from "../ProfileAvatar";
 import Button from "../UI/Button";
 import MediaGallery from "./MediaGallery";
 import ErrorBlock from "../UI/ErrorBlock";
+import toast from "react-hot-toast";
 
 function EditPost({ onCancel, postId }) {
   const { userData, token } = useAuth();
@@ -26,6 +27,7 @@ function EditPost({ onCancel, postId }) {
       await queryClient.invalidateQueries({ queryKey: ["post", postId] });
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
       onCancel();
+      toast.success("Post updated successfully!");
     },
   });
 

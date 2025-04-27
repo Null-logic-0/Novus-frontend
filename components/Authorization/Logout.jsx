@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { logout } from "../../util/http";
 import { clearAuth } from "../../src/store/authSlice";
+import toast from "react-hot-toast";
 
 function Logout() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Logout() {
       navigate("/login");
     } catch (error) {
       console.error("Logout Failed", error);
+      toast.error("Logout Failed!");
     }
   }
 

@@ -4,6 +4,7 @@ import PostForm from "./PostForm";
 import { useMutation } from "@tanstack/react-query";
 import { createPost, queryClient } from "../../util/http";
 import ErrorBlock from "../UI/ErrorBlock";
+import toast from "react-hot-toast";
 
 function CreatePost({ onCancel }) {
   const { userData, token } = useAuth();
@@ -14,6 +15,7 @@ function CreatePost({ onCancel }) {
       await queryClient.invalidateQueries({ queryKey: ["me"] });
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
       onCancel();
+      toast.success("Post created successfully!");
     },
   });
 

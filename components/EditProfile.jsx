@@ -7,6 +7,7 @@ import Button from "./UI/Button";
 import FormUI from "./UI/FormUI";
 import Input from "./UI/Input";
 import ErrorBlock from "./UI/ErrorBlock";
+import toast from "react-hot-toast";
 
 function EditProfile({ onClose }) {
   const { userData, token } = useAuth();
@@ -22,6 +23,7 @@ function EditProfile({ onClose }) {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["me"] });
       onClose();
+      toast.success("Profile updated successfully!");
     },
   });
 

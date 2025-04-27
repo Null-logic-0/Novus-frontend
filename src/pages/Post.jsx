@@ -1,8 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
 import { HeadProvider, Title } from "react-head";
-
-import { useAuth } from "../../hooks/useAuth";
-import { getSinglePost } from "../../util/http";
 
 import MainContainer from "../../components/MainContainer";
 import PagesHeader from "../../components/PagesHeader";
@@ -12,21 +8,12 @@ import { useParams } from "react-router";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/Posts/PostItem";
 import PostComments from "../../components/Comments/PostComments";
+import { useSinglePost } from "../../hooks/useSinglePost";
 
 function Post() {
   const { postId } = useParams();
+  const { data: postData, isError, error, isPending } = useSinglePost(postId);
 
-  const { token } = useAuth();
-  const {
-    data: postData,
-    isError,
-    error,
-    isPending,
-  } = useQuery({
-    queryKey: ["post", { id: postId }],
-    queryFn: () => getSinglePost({ token, id: postId }),
-    enabled: !!token && !!{ id: postId },
-  });
   const post = postData?.data?.post;
   const userId = Number(post?.user?._id);
 
@@ -47,7 +34,8 @@ function Post() {
                 name={post?.user?.fullName}
                 caption={post?.caption}
                 media={post?.media}
-                likes={post?.likes}
+                likes={post.likes}
+                initialLikes={post.likes.length}
                 date={post?.createdAt}
               />
             </ContentContainer>

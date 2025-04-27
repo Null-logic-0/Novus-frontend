@@ -14,12 +14,13 @@ function PostItem({
   date,
   media = [],
   likes,
-  comments,
+  initialLikes,
   link,
   userId,
   postId,
 }) {
   const { userData } = useAuth();
+
   return (
     <div className="flex justify-between w-full items-start">
       <div className="flex items-start max-md:justify-center w-full  gap-2 ">
@@ -37,7 +38,12 @@ function PostItem({
           <p className="text-[14px]">{caption}</p>
 
           <MediaGallery media={media} />
-          <PostActions likes={likes} comments={comments} link={link} />
+          <PostActions
+            initialLikes={initialLikes}
+            postId={postId}
+            likes={likes}
+            link={link}
+          />
         </div>
       </div>
       {userData?.data?.user?._id === userId && (

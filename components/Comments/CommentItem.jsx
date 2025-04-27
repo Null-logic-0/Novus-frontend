@@ -5,7 +5,13 @@ import CommentActions from "./CommentActions";
 import CommentReplies from "./CommentReplies";
 import CommentDropdownMenu from "./CommentDropdownMenu";
 
-function CommentItem({ comment, setParentCommentId, commentId }) {
+function CommentItem({
+  comment,
+  setParentCommentId,
+  commentId,
+  postId,
+  comments,
+}) {
   return (
     <div className="flex  items-start gap-3">
       <ProfileAvatar
@@ -26,10 +32,17 @@ function CommentItem({ comment, setParentCommentId, commentId }) {
         </div>
 
         <p>{comment.text}</p>
-        <CommentActions
-          setParentCommentId={setParentCommentId}
-          commentId={commentId}
-        />
+        {comments.map((comment) => (
+          <CommentActions
+            key={comment._id}
+            commentId={comment._id}
+            likes={comment.likes}
+            postId={postId}
+            setParentCommentId={setParentCommentId}
+            initialLikes={comment.likes.length}
+          />
+        ))}
+
         <CommentReplies
           setParentCommentId={setParentCommentId}
           comment={comment}

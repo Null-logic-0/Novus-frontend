@@ -54,6 +54,7 @@ function Posts() {
                     caption={post.caption}
                     media={post.media}
                     likes={post.likes}
+                    initialLikes={post.likes.length}
                     date={post.createdAt}
                     link={`posts/${post.user._id}/post/${post._id}`}
                   />

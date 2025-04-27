@@ -1,5 +1,4 @@
 import { QueryClient } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 
 export const queryClient = new QueryClient();
 
@@ -315,10 +314,6 @@ export async function deleteComment({ token, id }) {
     throw new Error("No token found. Please log in.");
   }
 
-  if (!token) {
-    throw new Error("No token found. Please log in.");
-  }
-
   const response = await fetch(`${URL}/posts/comments/${id}`, {
     method: "DELETE",
     headers: {
@@ -336,4 +331,50 @@ export async function deleteComment({ token, id }) {
   }
 
   return { success: true, message: "Comment deleted successfully." };
+}
+
+export async function postLike({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+  const response = await fetch(`${URL}/posts/${id}/like`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message);
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return result;
+}
+
+export async function commentLike({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/posts/comments/${id}/like`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message);
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return result;
 }

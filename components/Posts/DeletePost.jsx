@@ -3,6 +3,7 @@ import { useAuth } from "../../hooks/useAuth";
 import Button from "../UI/Button";
 import ErrorBlock from "../UI/ErrorBlock";
 import { deletePost, queryClient } from "../../util/http";
+import toast from "react-hot-toast";
 
 function DeletePost({ onCancel, postId }) {
   const { token } = useAuth();
@@ -14,6 +15,7 @@ function DeletePost({ onCancel, postId }) {
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
       await queryClient.invalidateQueries({ queryKey: ["post", postId] });
       onCancel();
+      toast.success("Post deleted Successfully!");
     },
   });
 
