@@ -166,6 +166,73 @@ export async function searchUser({ token, type, query = "" }) {
   return result;
 }
 
+export async function followUnfollowUser({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/users/follow/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message);
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function getFollowerUsers({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/users/followers/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to find followers!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function getFollowingUsers({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/users/following/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to find followers!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
 export async function getPosts(token) {
   if (!token) {
     throw new Error("No token found. Please log in.");

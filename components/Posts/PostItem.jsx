@@ -6,6 +6,7 @@ import PostActions from "./PostActions";
 import PostDropdownMenu from "./PostDropdownMenu";
 import { formatPostDate } from "../../helper/formatDate";
 import { useAuth } from "../../hooks/useAuth";
+import FollowUnfollowButton from "../FollowUnfollowButton";
 
 function PostItem({
   profileImg,
@@ -27,6 +28,7 @@ function PostItem({
         <ProfileAvatar alt={name} img={profileImg} />
 
         <div className="flex flex-col p-[2px]">
+          <FollowUnfollowButton userId={userId} />
           <p className="font-bold text-[14px]">
             <Link to={`/${userId}`} className="hover:underline">
               {name}

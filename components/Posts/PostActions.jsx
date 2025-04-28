@@ -13,11 +13,6 @@ function PostActions({ initialLikes, postId, likes, link }) {
     (like) => like[0] === userData?.data?.user._id
   );
 
-  console.log("User ID from userData:", userData?.data?.user._id);
-  console.log("Likes array:", likes);
-
-  console.log("MAtch", isLikedByUser === userData?.data?.user._id);
-
   const [isLiked, setIsLiked] = useState(isLikedByUser);
   const [likesCount, setLikes] = useState(initialLikes ?? 0);
   const [isPopping, setIsPopping] = useState(false);

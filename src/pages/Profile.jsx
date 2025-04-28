@@ -40,7 +40,11 @@ function Profile() {
         <PagesHeader title="Profile" />
 
         <MainContainer>
-          <ProfileHeader userData={userData} currentUser={currentUser} />
+          <ProfileHeader
+            userData={userData}
+            currentUser={currentUser}
+            userId={slug}
+          />
 
           {currentUser && (
             <>

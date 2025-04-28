@@ -1,5 +1,5 @@
+import FollowUnfollowButton from "./FollowUnfollowButton";
 import ProfileAvatar from "./ProfileAvatar";
-import Button from "./UI/Button";
 
 function UserList({ users = [] }) {
   return (
@@ -17,9 +17,9 @@ function UserList({ users = [] }) {
                 alt={`${user?.fullName}-avatar`}
                 img={user?.profileImage}
               />
-              <p>{user.fullName}</p>
+              <p className="text-white font-semibold">{user.fullName}</p>
             </div>
-            <Button className="bg-white w-30 rounded-xl p-2">Follow</Button>
+            <FollowUnfollowButton isFullButton userId={user._id} />
           </li>
         ))
       )}

@@ -13,7 +13,7 @@ function MainHeader() {
       </div>
       <div className="flex items-center justify-end p-4 w-full ">
         <DropdownMenu
-          modalId="dropdown"
+          modalId="dropdown-2"
           className="absolute right-10  max-md:bg-[#171717] max-md:rounded-2xl"
           icon={<HiOutlineMenuAlt2 />}
         >

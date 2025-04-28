@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { formatFollowers } from "../helper/formatFollowers";
 import ProfileAvatar from "./ProfileAvatar";
 import Button from "./UI/Button";
 import { closeModal, openModal } from "../src/store/UI-slice";
 import Modal from "./UI/Modal";
 import EditProfile from "./EditProfile";
+import FollowUnfollowButton from "./FollowUnfollowButton";
+import FollowStats from "./FollowStats";
 
-function ProfileHeader({ userData, currentUser }) {
+function ProfileHeader({ userData, currentUser, userId }) {
   const followers = userData?.data?.user?.followers?.length ?? 0;
+  const following = userData?.data?.user?.following?.length ?? 0;
   const activeModal = useSelector((state) => state.ui.activeModal);
 
   const dispatch = useDispatch();
@@ -32,9 +34,11 @@ function ProfileHeader({ userData, currentUser }) {
               {userData?.data?.user?.bio}
             </p>
 
-            <p className="font-semibold text-sm opacity-50">
-              {formatFollowers(followers)}
-            </p>
+            <FollowStats
+              followers={followers}
+              following={following}
+              userId={userId}
+            />
           </div>
           <ProfileAvatar
             className="w-20 h-20"
@@ -50,7 +54,7 @@ function ProfileHeader({ userData, currentUser }) {
             Edit Profile
           </Button>
         ) : (
-          <p>follow</p>
+          <FollowUnfollowButton isBigButton isFullButton userId={userId} />
         )}
       </div>
       {activeModal === "editProfile" && (

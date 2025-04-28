@@ -1,14 +1,17 @@
-import MainContainer from "../MainContainer";
-import MenuButton from "./MenuButton";
+import { useLocation } from "react-router";
 import { useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { useDispatch, useSelector } from "react-redux";
+
+import MainContainer from "../MainContainer";
+import MenuButton from "./MenuButton";
 import { closeModal, openModal } from "../../src/store/UI-slice";
 
 function DropdownMenu({ className, children, icon, modalId }) {
   const menuRef = useRef(null);
   const dispatch = useDispatch();
   const activeModal = useSelector((state) => state.ui.activeModal);
+  const location = useLocation();
 
   const openDropdownMenuHandler = () => {
     dispatch(openModal(modalId));
@@ -30,10 +33,14 @@ function DropdownMenu({ className, children, icon, modalId }) {
     };
   }, [dispatch, modalId, activeModal]);
 
+  useEffect(() => {
+    dispatch(closeModal(modalId));
+  }, [location, modalId, dispatch]);
+
   return (
     <div ref={menuRef}>
       <MenuButton
-        className="relative text-lg opacity-50 hover:opacity-100"
+        className=" text-lg opacity-50 hover:opacity-100"
         onClick={openDropdownMenuHandler}
       >
         {icon}
