@@ -12,8 +12,14 @@ function CreatePost({ onCancel }) {
   const { mutate, isError, error, isPending } = useMutation({
     mutationFn: createPost,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["me"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["me", userData?.data?.user._id],
+      });
+
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["post"],
+      });
       onCancel();
       toast.success("Post created successfully!");
     },

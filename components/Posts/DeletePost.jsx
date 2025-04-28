@@ -6,12 +6,15 @@ import { deletePost, queryClient } from "../../util/http";
 import toast from "react-hot-toast";
 
 function DeletePost({ onCancel, postId }) {
-  const { token } = useAuth();
+  const { token, userData } = useAuth();
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: ({ token }) => deletePost({ token, id: postId }),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["me"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["me", userData?.data?.user._id],
+      });
+
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
       await queryClient.invalidateQueries({ queryKey: ["post", postId] });
       onCancel();

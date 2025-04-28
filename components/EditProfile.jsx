@@ -21,7 +21,10 @@ function EditProfile({ onClose }) {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: updateMe,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["me"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["me", userData?.data?.user._id],
+      });
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
       onClose();
       toast.success("Profile updated successfully!");
     },

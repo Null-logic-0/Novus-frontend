@@ -1,31 +1,40 @@
 import { useRef } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { useAuth } from "../../hooks/useAuth";
-import { getSinglePost, queryClient, updatePost } from "../../util/http";
+import { queryClient, updatePost } from "../../util/http";
 
 import ProfileAvatar from "../ProfileAvatar";
 import Button from "../UI/Button";
 import MediaGallery from "./MediaGallery";
 import ErrorBlock from "../UI/ErrorBlock";
 import toast from "react-hot-toast";
+import { useSinglePost } from "../../hooks/useSinglePost";
 
 function EditPost({ onCancel, postId }) {
   const { userData, token } = useAuth();
   const captionRef = useRef();
 
-  const { data: postData, isPending: postIsLoading } = useQuery({
-    queryKey: ["post", postId],
-    queryFn: () => getSinglePost({ id: postId, token }),
-    enabled: !!postId,
-  });
+  console.log(userData?.data?.user._id, "USERID");
+  console.log(postId, "PostID");
+
+  const { post: postData, isPending: postIsLoading } = useSinglePost(postId);
+
   const { isError, error, isPending, mutate } = useMutation({
     mutationFn: ({ id, token, data }) => updatePost({ id, token, data }),
 
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["me"] });
-      await queryClient.invalidateQueries({ queryKey: ["post", postId] });
+      await queryClient.invalidateQueries({
+        queryKey: ["me", userData?.data?.user._id],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["user", userData?.data?.user._id],
+      });
+
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["post", postId],
+      });
       onCancel();
       toast.success("Post updated successfully!");
     },
