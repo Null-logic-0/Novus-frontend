@@ -10,31 +10,45 @@ import MediaGallery from "./MediaGallery";
 import ErrorBlock from "../UI/ErrorBlock";
 import toast from "react-hot-toast";
 import { useSinglePost } from "../../hooks/useSinglePost";
+import { getSocket } from "../../lib/socket";
 
 function EditPost({ onCancel, postId }) {
   const { userData, token } = useAuth();
   const captionRef = useRef();
 
-  console.log(userData?.data?.user._id, "USERID");
-  console.log(postId, "PostID");
+  const userId = userData?.data?.user._id;
 
   const { post: postData, isPending: postIsLoading } = useSinglePost(postId);
 
   const { isError, error, isPending, mutate } = useMutation({
     mutationFn: ({ id, token, data }) => updatePost({ id, token, data }),
 
-    onSuccess: async () => {
+    onSuccess: async (data) => {
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("edit-post", {
+          data: {
+            post: data.data?.post || data,
+          },
+          user: {
+            _id: userId,
+            fullName: userData?.data?.user?.fullName,
+            profileImage: userData?.data?.user?.profileImage,
+          },
+        });
+      }
+
       await queryClient.invalidateQueries({
-        queryKey: ["me", userData?.data?.user._id],
+        queryKey: ["me", userId],
       });
       await queryClient.invalidateQueries({
-        queryKey: ["user", userData?.data?.user._id],
+        queryKey: ["user"],
       });
 
-      await queryClient.invalidateQueries({ queryKey: ["posts"] });
       await queryClient.invalidateQueries({
         queryKey: ["post", postId],
       });
+      await queryClient.invalidateQueries({ queryKey: ["posts"] });
       onCancel();
       toast.success("Post updated successfully!");
     },

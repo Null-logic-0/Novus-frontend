@@ -21,8 +21,9 @@ function EditProfile({ onClose }) {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: updateMe,
     onSuccess: async () => {
+      const userId = userData?.data?.user._id;
       await queryClient.invalidateQueries({
-        queryKey: ["me", userData?.data?.user._id],
+        queryKey: ["me", userId],
       });
       await queryClient.invalidateQueries({ queryKey: ["user"] });
       onClose();
