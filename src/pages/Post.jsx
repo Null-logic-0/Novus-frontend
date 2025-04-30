@@ -34,7 +34,7 @@ function Post() {
                 name={post?.user?.fullName}
                 caption={post?.caption}
                 media={post?.media}
-                likes={post.likes}
+                likes={post.likes ?? []}
                 initialLikes={post.likes.length}
                 date={post?.createdAt}
               />

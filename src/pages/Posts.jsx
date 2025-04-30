@@ -1,13 +1,14 @@
+import { HeadProvider, Title } from "react-head";
+import { useQuery } from "@tanstack/react-query";
+import { getPosts } from "../../util/http";
+import { useAuth } from "../../hooks/useAuth";
+
+import { MdContentPasteOff } from "react-icons/md";
 import PagesHeader from "../../components/PagesHeader";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/Posts/PostItem";
 import MainContainer from "../../components/MainContainer";
 import CreatePostBar from "../../components/Posts/CreatePostBar";
-import { HeadProvider, Title } from "react-head";
-import { useQuery } from "@tanstack/react-query";
-import { getPosts } from "../../util/http";
-import { useAuth } from "../../hooks/useAuth";
-import { MdContentPasteOff } from "react-icons/md";
 import LoadingIndicator from "../../components/UI/LoadingIndicator";
 import ErrorBlock from "../../components/UI/ErrorBlock";
 
@@ -18,7 +19,7 @@ const options = [
 ];
 
 function Posts() {
-  const { token } = useAuth();
+  const { token, userData } = useAuth();
   const {
     data: postData,
     isError,
@@ -39,21 +40,18 @@ function Posts() {
         <PagesHeader dropDown={true} options={options} />
         <MainContainer>
           <CreatePostBar />
-          <div className="flex items-center justify-center">
-            {isPending && <LoadingIndicator />}
-          </div>
 
           {!isPending && !isError && postData?.data?.posts?.length > 0
             ? postData.data.posts.map((post) => (
                 <ContentContainer key={post._id}>
                   <PostItem
-                    userId={post.user._id}
+                    userId={post?.user._id || userData?.data?.user._id}
                     postId={post._id}
                     profileImg={post.user.profileImage}
                     name={post.user.fullName}
                     caption={post.caption}
                     media={post.media}
-                    likes={post.likes}
+                    likes={post.likes ?? []}
                     initialLikes={post.likes.length}
                     date={post.createdAt}
                     link={`posts/${post.user._id}/post/${post._id}`}
@@ -71,6 +69,9 @@ function Posts() {
                 </>
               )}
         </MainContainer>
+        <div className="flex items-center justify-center">
+          {isPending && <LoadingIndicator />}
+        </div>
         {isError && (
           <>
             <ErrorBlock

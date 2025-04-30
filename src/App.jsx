@@ -17,13 +17,16 @@ import SettingsRoot from "./pages/SettingsRoot.jsx";
 import BlockedProfiles from "./pages/BlockedProfiles.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectRoutes from "../components/Authorization/ProtectRoutes.jsx";
+import AppShell from "../components/AppShell.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <ProtectRoutes>
-        <RootLayout />
+        <AppShell>
+          <RootLayout />
+        </AppShell>
       </ProtectRoutes>
     ),
     children: [

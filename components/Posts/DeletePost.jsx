@@ -4,6 +4,7 @@ import Button from "../UI/Button";
 import ErrorBlock from "../UI/ErrorBlock";
 import { deletePost, queryClient } from "../../util/http";
 import toast from "react-hot-toast";
+import { getSocket } from "../../lib/socket";
 
 function DeletePost({ onCancel, postId }) {
   const { token, userData } = useAuth();
@@ -11,8 +12,16 @@ function DeletePost({ onCancel, postId }) {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: ({ token }) => deletePost({ token, id: postId }),
     onSuccess: async () => {
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("delete-post", postId);
+      }
+      const userId = userData?.data?.user._id;
       await queryClient.invalidateQueries({
-        queryKey: ["me", userData?.data?.user._id],
+        queryKey: ["me", userId],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["user"],
       });
 
       await queryClient.invalidateQueries({ queryKey: ["posts"] });
