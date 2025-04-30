@@ -38,8 +38,10 @@ function PostItem({
             </span>
           </p>
           <p className="text-[14px]">{caption}</p>
-
-          <MediaGallery media={media} />
+          <MediaGallery
+            media={media}
+            link={`/${userId}/post/${postId}/media`}
+          />
           <PostActions
             initialLikes={initialLikes}
             postId={postId}

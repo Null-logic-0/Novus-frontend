@@ -1,7 +1,7 @@
 import { HeadProvider, Title } from "react-head";
-import { useQuery } from "@tanstack/react-query";
-import { getPosts } from "../../util/http";
-import { useAuth } from "../../hooks/useAuth";
+// import { useQuery } from "@tanstack/react-query";
+// import { getPosts } from "../../util/http";
+// import { useAuth } from "../../hooks/useAuth";
 
 import { MdContentPasteOff } from "react-icons/md";
 import PagesHeader from "../../components/PagesHeader";
@@ -11,6 +11,7 @@ import MainContainer from "../../components/MainContainer";
 import CreatePostBar from "../../components/Posts/CreatePostBar";
 import LoadingIndicator from "../../components/UI/LoadingIndicator";
 import ErrorBlock from "../../components/UI/ErrorBlock";
+import { usePosts } from "../../hooks/usePosts";
 
 const options = [
   { label: "Feed", value: "feed" },
@@ -19,17 +20,7 @@ const options = [
 ];
 
 function Posts() {
-  const { token, userData } = useAuth();
-  const {
-    data: postData,
-    isError,
-    error,
-    isPending,
-  } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => getPosts(token),
-    enabled: !!token,
-  });
+  const { postData, isError, error, isPending, userData } = usePosts();
 
   return (
     <>

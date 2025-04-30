@@ -35,8 +35,6 @@ const router = createBrowserRouter([
       { path: "activity", element: <Activity /> },
       { path: ":slug", element: <Profile /> },
       { path: "posts/:userId/post/:postId", element: <Post /> },
-      { path: ":userId/post/:postId/media", element: <Media /> },
-      { path: ":userId/post/:postId/comment", element: <p>test</p> },
       {
         path: "settings",
         element: <SettingsRoot />,
@@ -47,6 +45,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: ":userId/post/:postId/media", element: <Media /> },
   {
     path: "signup",
     element: <Signup />,
