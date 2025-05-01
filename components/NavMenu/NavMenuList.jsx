@@ -34,6 +34,7 @@ function NavMenuList() {
       <ul className="flex flex-col items-center h-full justify-center xl:gap-7 max-md:flex-row max-md:justify-between  max-md:w-full">
         <NavItem
           link="/"
+          additionalActiveLinks={["/followings", "/liked"]}
           active={<AiFillHome />}
           unActive={<AiOutlineHome />}
         />

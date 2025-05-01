@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../util/http";
 import { useAuth } from "./useAuth";
 
-export function usePosts() {
+export function usePosts(filter) {
   const { token, userData } = useAuth();
   const {
     data: postData,
@@ -11,7 +11,7 @@ export function usePosts() {
     isPending,
   } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => getPosts(token),
+    queryFn: () => getPosts(token, filter),
     enabled: !!token,
   });
 

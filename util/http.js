@@ -233,12 +233,12 @@ export async function getFollowingUsers({ token, id }) {
   return result;
 }
 
-export async function getPosts(token) {
+export async function getPosts(token, filter) {
   if (!token) {
     throw new Error("No token found. Please log in.");
   }
-
-  const response = await fetch(`${URL}/posts`, {
+  const query = filter ? `?filter=${filter}` : "";
+  const response = await fetch(`${URL}/posts${query}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

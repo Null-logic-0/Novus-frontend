@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Dropdown({ options }) {
   const [selected, setSelected] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setSelected(e.target.value);
+    const value = e.target.value;
+    setSelected(value);
+    navigate(`${value}`);
   };
 
   return (

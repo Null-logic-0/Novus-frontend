@@ -1,26 +1,29 @@
 import { HeadProvider, Title } from "react-head";
-import { usePosts } from "../../hooks/usePosts";
-
-import { MdContentPasteOff } from "react-icons/md";
 import ContentContainer from "../../components/ContentContainer";
 import PostItem from "../../components/Posts/PostItem";
+import { MdContentPasteOff } from "react-icons/md";
 import LoadingIndicator from "../../components/UI/LoadingIndicator";
 import ErrorBlock from "../../components/UI/ErrorBlock";
 
-function Posts() {
-  const { postData, isError, error, isPending, userData } = usePosts();
+import { usePosts } from "../../hooks/usePosts";
+
+function Followings() {
+  const { postData, isError, error, isPending, userData } =
+    usePosts("followings");
+
+  const userId = userData?.data?.user._id;
 
   return (
     <>
       <HeadProvider>
-        <Title>Posts | Novus</Title>
+        <Title>Followings | Novus</Title>
       </HeadProvider>
 
       {!isPending && !isError && postData?.data?.posts?.length > 0
         ? postData.data.posts.map((post) => (
             <ContentContainer key={post._id}>
               <PostItem
-                userId={post?.user._id || userData?.data?.user._id}
+                userId={post?.user._id || userId}
                 postId={post._id}
                 profileImg={post.user.profileImage}
                 name={post.user.fullName}
@@ -39,7 +42,9 @@ function Posts() {
               <hr className="border-[#4d4d4d]" />
               <p className="flex opacity-50 flex-col items-center gap-2 p-4">
                 <MdContentPasteOff className="text-4xl" />
-                <span className="font-semibold text-xl">No posts</span>
+                <span className="font-semibold text-xl">
+                  No following user posts yet.
+                </span>
               </p>
             </>
           )}
@@ -64,4 +69,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default Followings;

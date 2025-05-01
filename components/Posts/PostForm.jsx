@@ -37,6 +37,7 @@ function PostForm({ onCancel, onSubmit, isPending }) {
     >
       <textarea
         name="caption"
+        rows={4}
         placeholder="What's new?"
         value={caption}
         onChange={(e) => setCaption(e.target.value)}

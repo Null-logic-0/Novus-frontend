@@ -18,6 +18,9 @@ import BlockedProfiles from "./pages/BlockedProfiles.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectRoutes from "../components/Authorization/ProtectRoutes.jsx";
 import AppShell from "../components/AppShell.jsx";
+import FeedRoot from "./pages/FeedRoot.jsx";
+import Followings from "./pages/Followings.jsx";
+import Liked from "./pages/Liked.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +33,15 @@ const router = createBrowserRouter([
       </ProtectRoutes>
     ),
     children: [
-      { index: true, element: <Posts /> },
+      {
+        path: "/",
+        element: <FeedRoot />,
+        children: [
+          { index: true, element: <Posts /> },
+          { path: "followings", element: <Followings /> },
+          { path: "liked", element: <Liked /> },
+        ],
+      },
       { path: "search", element: <Search /> },
       { path: "activity", element: <Activity /> },
       { path: ":slug", element: <Profile /> },
