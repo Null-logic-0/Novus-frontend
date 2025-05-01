@@ -233,6 +233,28 @@ export async function getFollowingUsers({ token, id }) {
   return result;
 }
 
+export async function getActivity(token) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/activity`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to find activity!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
 export async function getPosts(token, filter) {
   if (!token) {
     throw new Error("No token found. Please log in.");

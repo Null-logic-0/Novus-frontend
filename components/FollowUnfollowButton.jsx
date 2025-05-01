@@ -20,9 +20,10 @@ function FollowUnfollowButton({ isFullButton, isBigButton, userId }) {
     mutationFn: () => followUnfollowUser({ token, id: userId }),
 
     onMutate: async () => {
-      setIsFollowingState((prev) => !prev);
+      const willFollow = !isFollowingState;
+      setIsFollowingState(willFollow);
 
-      toast.loading(isFollowingState ? "Unfollowing..." : "Following...", {
+      toast.loading(willFollow ? "Following..." : "Unfollowing...", {
         id: "followAction",
       });
 
@@ -41,16 +42,22 @@ function FollowUnfollowButton({ isFullButton, isBigButton, userId }) {
               ...oldData.data,
               user: {
                 ...oldData.data.user,
-                following: isFollowingState
-                  ? oldData.data.user.following.filter((id) => id !== userId)
-                  : [...oldData.data.user.following, userId],
+                following: willFollow
+                  ? [...oldData.data.user.following, userId]
+                  : oldData.data.user.following.filter((id) => id !== userId),
               },
             },
           };
         }
       );
 
-      return { previousUser };
+      return { previousUser, willFollow };
+    },
+
+    onSuccess: (_data, _vars, context) => {
+      toast.success(context?.willFollow ? "Followed!" : "Unfollowed!", {
+        id: "followAction",
+      });
     },
 
     onError: (error, variables, context) => {
@@ -64,12 +71,6 @@ function FollowUnfollowButton({ isFullButton, isBigButton, userId }) {
       }
 
       toast.error(error?.info?.message || "Failed to follow/unfollow.", {
-        id: "followAction",
-      });
-    },
-
-    onSuccess: () => {
-      toast.success(isFollowingState ? "Unfollowed!" : "Followed!", {
         id: "followAction",
       });
     },
