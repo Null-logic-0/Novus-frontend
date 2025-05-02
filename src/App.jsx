@@ -58,11 +58,11 @@ const router = createBrowserRouter([
   },
   { path: ":userId/post/:postId/media", element: <Media /> },
   {
-    path: "signup",
+    path: "/signup",
     element: <Signup />,
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
 ]);

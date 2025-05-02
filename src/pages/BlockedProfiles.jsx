@@ -1,16 +1,5 @@
 import { HeadProvider, Title } from "react-head";
-import UserList from "../../components/UserList";
-
-const USER = [
-  {
-    id: "123",
-    name: "John Doe",
-  },
-  {
-    id: "123s",
-    name: "Bob Ross",
-  },
-];
+// import UserList from "../../components/UserList";
 
 function BlockedProfiles() {
   return (
@@ -22,7 +11,7 @@ function BlockedProfiles() {
         <h2 className="font-semibold opacity-50">Blocked Users</h2>
         <hr className="border-[#4d4d4d]" />
 
-        <UserList users={USER} />
+        {/* <UserList users={USER} /> */}
       </div>
     </>
   );
