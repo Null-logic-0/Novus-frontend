@@ -1,12 +1,14 @@
-import DropdownMenu from "../NavMenu/DropdownMenu";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "../../src/store/UI-slice";
+
+import DropdownMenu from "../NavMenu/DropdownMenu";
 import Modal from "../UI/Modal";
 import EditPost from "./EditPost";
 import DeletePost from "./DeletePost";
+
+import { HiDotsHorizontal } from "react-icons/hi";
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 function PostDropdownMenu({ postId }) {
   const dispatch = useDispatch();

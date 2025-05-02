@@ -4,7 +4,7 @@ import SettingsNavItem from "../../components/SettingsNavMenu/SettingsNavItem";
 
 function SettingsRoot() {
   return (
-    <MainContainer className="p-6">
+    <MainContainer className="p-6 mt-6">
       <ul className="flex justify-center items-center gap-2  p-6">
         <SettingsNavItem link="/settings/blocked-profiles">
           Blocked Profiles

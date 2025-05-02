@@ -12,7 +12,7 @@ function Media() {
   const post = postData?.data?.post;
 
   function handleNavigate() {
-    navigate("..");
+    navigate(-1);
   }
 
   return (

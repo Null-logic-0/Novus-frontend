@@ -150,6 +150,52 @@ export async function deleteMyAccount(token) {
   return result;
 }
 
+export async function blockUser({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/users/block/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+
+    credentials: "include",
+  });
+  const result = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to block this account!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function getBlockedUsers(token) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/users/blocked-users`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to fetch users!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
 export async function getAllUsers(token) {
   if (!token) {
     throw new Error("No token found. Please log in.");
