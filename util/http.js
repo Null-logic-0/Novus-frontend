@@ -127,6 +127,29 @@ export async function updatePassword({ token, data }) {
   return result;
 }
 
+export async function deleteMyAccount(token) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+  const response = await fetch(`${URL}/users/deleteMe`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+
+    credentials: "include",
+  });
+  const result = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to delete account!");
+    error.code = response.status;
+    error.info = result || {};
+    throw error;
+  }
+  return result;
+}
+
 export async function getAllUsers(token) {
   if (!token) {
     throw new Error("No token found. Please log in.");
