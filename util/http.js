@@ -94,6 +94,39 @@ export async function updateMe({ token, data }) {
   return result;
 }
 
+export async function updatePassword({ token, data }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const passwordCurrent = data.get("passwordCurrent");
+  const password = data.get("password");
+  const passwordConfirm = data.get("passwordConfirm");
+
+  const response = await fetch(`${URL}/users/updateMyPassword`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      passwordCurrent,
+      password,
+      passwordConfirm,
+    }),
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to update password!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
 export async function getAllUsers(token) {
   if (!token) {
     throw new Error("No token found. Please log in.");
