@@ -21,10 +21,12 @@ import AppShell from "../components/AppShell.jsx";
 import FeedRoot from "./pages/FeedRoot.jsx";
 import Followings from "./pages/Followings.jsx";
 import Liked from "./pages/Liked.jsx";
+import Error from "./pages/Error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <Error />,
     element: (
       <ProtectRoutes>
         <AppShell>
