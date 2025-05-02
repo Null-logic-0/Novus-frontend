@@ -1,22 +1,10 @@
-import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { logout } from "../../util/http";
-import { clearAuth } from "../../src/store/authSlice";
-import toast from "react-hot-toast";
+import { useAuth } from "../../hooks/useAuth";
 
 function Logout() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { logout } = useAuth();
 
-  async function handleLogout() {
-    try {
-      await logout();
-      dispatch(clearAuth());
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout Failed", error);
-      toast.error("Logout Failed!");
-    }
+  function handleLogout() {
+    logout();
   }
 
   return (
