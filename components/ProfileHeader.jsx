@@ -6,6 +6,7 @@ import Modal from "./UI/Modal";
 import EditProfile from "./EditProfile";
 import FollowUnfollowButton from "./FollowUnfollowButton";
 import FollowStats from "./FollowStats";
+import ProfileDropdownMenu from "./ProfileDropDownMenu";
 
 function ProfileHeader({ userData, currentUser, userId }) {
   const followers = userData?.data?.user?.followers?.length ?? 0;
@@ -54,7 +55,13 @@ function ProfileHeader({ userData, currentUser, userId }) {
             Edit Profile
           </Button>
         ) : (
-          <FollowUnfollowButton isBigButton isFullButton userId={userId} />
+          <div className="flex w-full justify-center items-center gap-4">
+            <FollowUnfollowButton isBigButton isFullButton userId={userId} />
+            <ProfileDropdownMenu
+              userId={userId}
+              userName={userData?.data?.user?.fullName}
+            />
+          </div>
         )}
       </div>
       {activeModal === "editProfile" && (

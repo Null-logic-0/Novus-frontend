@@ -71,6 +71,9 @@ function Profile() {
                   link={`/posts/${post.user._id}/post/${post._id}`}
                   comments={post.comments}
                 />
+                {userData?.data?.user?.blockedUsers?.length < 0 && (
+                  <p>user blocked</p>
+                )}
               </ContentContainer>
             ))
           ) : (
