@@ -1,0 +1,11 @@
+import Empty from "../../components/Chat/ChatIsEmpty";
+
+function Direct() {
+  return (
+    <div className="flex max-lg:hidden justify-center w-full  items-center">
+      <Empty text="No chats here yet..." />
+    </div>
+  );
+}
+
+export default Direct;

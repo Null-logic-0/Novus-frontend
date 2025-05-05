@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { HeadProvider, Title } from "react-head";
-import { useQuery } from "@tanstack/react-query";
-import { getAllUsers } from "../../util/http";
-import { useAuth } from "../../hooks/useAuth";
 
 import PagesHeader from "../../components/PagesHeader";
 import SearchInput from "../../components/SearchInput";
@@ -10,16 +7,11 @@ import UserList from "../../components/UserList";
 import MainContainer from "../../components/MainContainer";
 import LoadingIndicator from "../../components/UI/LoadingIndicator";
 import ErrorBlock from "../../components/UI/ErrorBlock";
+import { useAllUsers } from "../../hooks/useAllUsers";
 
 function Search() {
-  const { token } = useAuth();
+  const { data, isLoading, isError, error } = useAllUsers();
   const [searchTerm, setSearchTerm] = useState("");
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["users"],
-    queryFn: () => getAllUsers(token),
-    enabled: !!token,
-  });
 
   const users = data?.data?.users || [];
 

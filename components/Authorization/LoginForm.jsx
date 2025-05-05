@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+import { setAuth } from "../../store/authSlice.jsx";
+import { login, queryClient } from "../../util/http";
 
-import { setAuth } from "../../src/store/authSlice";
 import Button from "../UI/Button";
 import FormUI from "../UI/FormUI";
 import Input from "../UI/Input";
-import { login, queryClient } from "../../util/http";
 import ErrorBlock from "../UI/ErrorBlock";
 
 function LoginForm() {

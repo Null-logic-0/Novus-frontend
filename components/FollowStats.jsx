@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { formatCount } from "../helper/formatCount";
-import { closeModal, openModal } from "../src/store/UI-slice";
+import { closeModal, openModal } from "../store/UI-slice";
 import Modal from "./UI/Modal";
 import FollowList from "./FollowList";
 import { getFollowerUsers, getFollowingUsers } from "../util/http";

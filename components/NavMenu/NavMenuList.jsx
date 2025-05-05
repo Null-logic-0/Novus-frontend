@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../hooks/useAuth";
-import { closeModal, openModal } from "../../src/store/UI-slice";
+import { closeModal, openModal } from "../../store/UI-slice";
 
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineHome } from "react-icons/ai";
-import { RiSearch2Fill } from "react-icons/ri";
+import { RiMessage3Fill, RiMessage3Line, RiSearch2Fill } from "react-icons/ri";
 import { RiSearch2Line } from "react-icons/ri";
 import { GoHeart } from "react-icons/go";
 import { GoHeartFill } from "react-icons/go";
@@ -37,6 +37,11 @@ function NavMenuList() {
           additionalActiveLinks={["/followings", "/liked"]}
           active={<AiFillHome />}
           unActive={<AiOutlineHome />}
+        />
+        <NavItem
+          link="/direct"
+          active={<RiMessage3Fill />}
+          unActive={<RiMessage3Line />}
         />
         <NavItem
           link="/search"

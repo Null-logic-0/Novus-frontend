@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, openModal } from "../../src/store/UI-slice";
 import { useAuth } from "../../hooks/useAuth";
+import { closeModal, openModal } from "../../store/UI-slice";
 
 import Button from "../UI/Button";
 import Input from "../UI/Input";

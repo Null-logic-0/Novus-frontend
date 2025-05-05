@@ -22,6 +22,9 @@ import FeedRoot from "./pages/FeedRoot.jsx";
 import Followings from "./pages/Followings.jsx";
 import Liked from "./pages/Liked.jsx";
 import Error from "./pages/Error.jsx";
+import Direct from "./pages/Direct.jsx";
+import DirectRoot from "./pages/DirectRoot.jsx";
+import Inbox from "./pages/Inbox.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,14 +61,37 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "direct",
+    errorElement: <Error />,
+    element: (
+      <ProtectRoutes>
+        <AppShell>
+          <DirectRoot />
+        </AppShell>
+      </ProtectRoutes>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Direct />,
+      },
+      {
+        path: "inbox/:id",
+        element: <Inbox />,
+      },
+    ],
+  },
   { path: ":userId/post/:postId/media", element: <Media /> },
   {
     path: "/signup",
+    errorElement: <Error />,
     element: <Signup />,
   },
 
   {
     path: "/login",
+    errorElement: <Error />,
     element: <Login />,
   },
 ]);

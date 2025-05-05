@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe, logout as logoutRequest } from "../util/http";
-import { clearAuth, setAuth } from "../src/store/authSlice";
+import { clearAuth, setAuth } from "../store/authSlice";
 
 import toast from "react-hot-toast";
 

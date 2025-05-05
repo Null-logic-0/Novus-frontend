@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
+import { closeModal, openModal } from "../store/UI-slice";
+
 import ProfileAvatar from "./ProfileAvatar";
 import Button from "./UI/Button";
-import { closeModal, openModal } from "../src/store/UI-slice";
 import Modal from "./UI/Modal";
 import EditProfile from "./EditProfile";
 import FollowUnfollowButton from "./FollowUnfollowButton";

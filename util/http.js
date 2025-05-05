@@ -641,3 +641,148 @@ export async function commentLike({ token, id }) {
 
   return result;
 }
+
+export async function createChat({ token, userIds }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/chats`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      userIds,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message);
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return result;
+}
+
+export async function getCreatedChats(token) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/chats`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to fetch chats!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function getSingleChat({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/chats/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to fetch chat!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
+
+export async function deleteChat({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/chats/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}));
+    const error = new Error(result?.message || "Failed to delete the chat.");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return { success: true, message: "Chat deleted successfully." };
+}
+
+export async function sendMessage({ token, data, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  data.append("chatId", id);
+
+  const response = await fetch(`${URL}/chats/messages`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: data,
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message);
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+
+  return result;
+}
+
+export async function getChatMessages({ token, id }) {
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const response = await fetch(`${URL}/chats/messages/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(result?.message || "Failed to fetch chat!");
+    error.code = response.status;
+    error.info = result;
+    throw error;
+  }
+  return result;
+}
