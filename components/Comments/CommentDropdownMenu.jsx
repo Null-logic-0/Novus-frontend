@@ -1,12 +1,14 @@
-import DropdownMenu from "../NavMenu/DropdownMenu";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, openModal } from "../../src/store/UI-slice";
+import { closeModal, openModal } from "../../store/UI-slice";
+
 import Modal from "../UI/Modal";
+import DropdownMenu from "../NavMenu/DropdownMenu";
 import DeleteComment from "./DeleteComment";
 import EditComment from "./EditComment";
+
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { HiDotsHorizontal } from "react-icons/hi";
 
 function CommentDropdownMenu({ commentId }) {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
-import { Link } from "react-head";
-import { formatPostDate } from "../../helper/formatDate";
+import { formatDate } from "../../helper/formatDate";
 import ProfileAvatar from "../ProfileAvatar";
 import CommentActions from "./CommentActions";
 import CommentReplies from "./CommentReplies";
 import CommentDropdownMenu from "./CommentDropdownMenu";
+import { useAuth } from "../../hooks/useAuth";
 
 function CommentItem({
   comment,
@@ -11,7 +11,10 @@ function CommentItem({
   commentId,
   postId,
   comments,
+  userId,
 }) {
+  const { userData } = useAuth();
+  const currentLoggedInUser = userData.data.user._id;
   return (
     <div className="flex  items-start gap-3">
       <ProfileAvatar
@@ -25,10 +28,12 @@ function CommentItem({
           <div className="flex items-center gap-2">
             <p className="font-bold">{comment.user?.fullName}</p>
             <span className="text-sm font-semibold opacity-50">
-              {formatPostDate(comment.createdAt)}
+              {formatDate(comment.createdAt)}
             </span>
           </div>
-          <CommentDropdownMenu commentId={commentId} />
+          {currentLoggedInUser === userId && (
+            <CommentDropdownMenu commentId={commentId} />
+          )}
         </div>
 
         <p>{comment.text}</p>

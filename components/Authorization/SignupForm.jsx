@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../src/store/authSlice.jsx";
+import { queryClient, signup } from "../../util/http.js";
+import { setAuth } from "../../store/authSlice.jsx";
 
 import Button from "../UI/Button";
 import FormUI from "../UI/FormUI";
 import Input from "../UI/Input";
-import { queryClient, signup } from "../../util/http.js";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
 function SignupForm() {

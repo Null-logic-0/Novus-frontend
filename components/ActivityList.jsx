@@ -1,4 +1,4 @@
-import { formatPostDate } from "../helper/formatDate";
+import { formatDate } from "../helper/formatDate";
 import ProfileAvatar from "./ProfileAvatar";
 
 function ActivityList({ isError, isPending, userActivities }) {
@@ -6,7 +6,7 @@ function ActivityList({ isError, isPending, userActivities }) {
     <ul className="flex flex-col gap-4">
       {!isPending && !isError && userActivities.data.activities.length > 0 ? (
         userActivities.data.activities.map((activity) => (
-          <li className="flex items-center justify-between">
+          <li className="flex items-center justify-between" key={activity._id}>
             <div className="flex items-center gap-2">
               <ProfileAvatar
                 img={activity.fromUser.profileImage}
@@ -20,11 +20,11 @@ function ActivityList({ isError, isPending, userActivities }) {
                 -
                 {activity.type === "like" ? (
                   <p className="text-white opacity-50 text-sm font-semibold">
-                    Liked your post {formatPostDate(activity.createdAt)}
+                    Liked your post {formatDate(activity.createdAt)}
                   </p>
                 ) : (
                   <p className="text-white opacity-50 text-sm font-semibold">
-                    Followed you {formatPostDate(activity.createdAt)}
+                    Followed you {formatDate(activity.createdAt)}
                   </p>
                 )}
               </div>

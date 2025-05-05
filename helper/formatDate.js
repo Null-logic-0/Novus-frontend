@@ -1,4 +1,4 @@
-export function formatPostDate(dateString) {
+export function formatDate(dateString) {
   const postDate = new Date(dateString);
   const now = new Date();
   const diffMs = now - postDate;

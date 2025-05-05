@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import { VscUnmute, VscMute } from "react-icons/vsc";
 import { Link } from "react-router";
+import { twMerge } from "tailwind-merge";
 import { v4 as uuidv4 } from "uuid";
 
-function MediaGallery({ media, link }) {
+function MediaGallery({ media, link, className, mediaStyle }) {
   const containerRef = useRef(null);
   const [muted, setMuted] = useState(true);
 
@@ -30,10 +31,7 @@ function MediaGallery({ media, link }) {
     }));
 
   return (
-    <div
-      ref={containerRef}
-      className="overflow-x-scroll pt-2 max-w-[550px] max-md:max-w-[300px] max-md:pr-4 flex  items-start gap-2 pr-6  scrollbar-hide"
-    >
+    <div ref={containerRef} className={className}>
       {/* Videos */}
       {videos.map((video) => (
         <div key={`video-${video.id}`} className="relative">
@@ -46,7 +44,10 @@ function MediaGallery({ media, link }) {
           </button>
           <Link to={link}>
             <video
-              className="rounded-xl w-80 h-full max-md:w-50 object-cover"
+              className={twMerge(
+                "rounded-xl w-80 h-full max-md:w-50 object-cover",
+                mediaStyle
+              )}
               src={video.src}
               style={{ maxWidth: "none" }}
               autoPlay
@@ -64,7 +65,10 @@ function MediaGallery({ media, link }) {
             src={image.src}
             alt={`media-${image.src}`}
             style={{ maxWidth: "none" }}
-            className="rounded-xl w-80 h-full max-md:w-50 object-cover"
+            className={twMerge(
+              "rounded-xl w-80 h-full max-md:w-50 object-cover",
+              mediaStyle
+            )}
           />
         </Link>
       ))}

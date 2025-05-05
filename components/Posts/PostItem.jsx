@@ -4,7 +4,7 @@ import ProfileAvatar from "../ProfileAvatar";
 import MediaGallery from "./MediaGallery";
 import PostActions from "./PostActions";
 import PostDropdownMenu from "./PostDropdownMenu";
-import { formatPostDate } from "../../helper/formatDate";
+import { formatDate } from "../../helper/formatDate";
 import { useAuth } from "../../hooks/useAuth";
 import FollowUnfollowButton from "../FollowUnfollowButton";
 
@@ -34,11 +34,12 @@ function PostItem({
               {name}
             </Link>
             <span className="ml-2 text-sm opacity-50 font-semibold ">
-              {formatPostDate(date)}
+              {formatDate(date)}
             </span>
           </p>
           <p className="text-[14px]">{caption}</p>
           <MediaGallery
+            className="overflow-x-scroll pt-2 max-w-[550px] max-md:max-w-[300px] max-md:pr-4 flex  items-start gap-2 pr-6  scrollbar-hide"
             media={media}
             link={`/${userId}/post/${postId}/media`}
           />

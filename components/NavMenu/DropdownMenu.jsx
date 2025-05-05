@@ -2,10 +2,10 @@ import { useLocation } from "react-router";
 import { useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { useDispatch, useSelector } from "react-redux";
+import { closeModal, openModal } from "../../store/UI-slice";
 
 import MainContainer from "../MainContainer";
 import MenuButton from "./MenuButton";
-import { closeModal, openModal } from "../../src/store/UI-slice";
 
 function DropdownMenu({ className, children, icon, modalId }) {
   const menuRef = useRef(null);

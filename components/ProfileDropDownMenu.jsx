@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, openModal } from "../src/store/UI-slice";
+import { closeModal, openModal } from "../store/UI-slice";
 
 import DropdownMenu from "./NavMenu/DropdownMenu";
 import Modal from "./UI/Modal";
