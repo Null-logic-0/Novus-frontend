@@ -6,19 +6,35 @@ import Button from "../UI/Button";
 import ErrorBlock from "../UI/ErrorBlock";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { getSocket } from "../../lib/socket";
 
 function DeleteChat({ onCancel, chatId }) {
-  const { token } = useAuth();
+  const { token, userData } = useAuth();
   const navigate = useNavigate();
   const { isError, error, isPending, mutate } = useMutation({
     mutationFn: ({ token }) => deleteChat({ token, id: chatId }),
+    // onSuccess: async () => {
+    //   await queryClient.invalidateQueries({
+    //     queryKey: ["chats"],
+    //   });
+    //   await onCancel();
+    //   await navigate("/direct");
+    //   toast.success("Chat delete successfully!");
+    // },
+
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["chats"],
-      });
+      const socket = getSocket();
+      if (socket) {
+        socket.emit("delete-chat", {
+          chatId,
+          users: userData.data.user._id, // or array of participants
+        });
+      }
+
+      await queryClient.invalidateQueries({ queryKey: ["chats"] });
       await onCancel();
       await navigate("/direct");
-      toast.success("Chat delete successfully!");
+      toast.success("Chat deleted successfully!");
     },
   });
 

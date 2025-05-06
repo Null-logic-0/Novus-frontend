@@ -21,7 +21,7 @@ function MessageItem({ isSender, messages }) {
         />
         <ul className="flex flex-col gap-1 w-full">
           {messages.map((message) => (
-            <MessageList isSender={isSender} key={message._id}>
+            <MessageList isSender={isSender} key={message?.sender?._id}>
               {message?.media?.length > 0 && (
                 <MediaGallery
                   media={message.media}

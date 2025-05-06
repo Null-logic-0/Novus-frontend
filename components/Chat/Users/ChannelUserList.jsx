@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
+import { getSocket } from "../../../lib/socket";
 import { useAllUsers } from "../../../hooks/useAllUsers";
 import { createChat, queryClient } from "../../../util/http";
 import { useAuth } from "../../../hooks/useAuth";
@@ -25,7 +26,15 @@ function ChannelUserList({ searchTerm }) {
 
   const { mutate } = useMutation({
     mutationFn: createChat,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data?.data?.chat, "DATA");
+
+      const socket = getSocket();
+      console.log(socket, "Socket");
+
+      if (socket) {
+        socket.emit("new-chat", data?.data?.chat);
+      }
       queryClient.invalidateQueries({ queryKey: ["chats"] });
     },
     onError: () => {

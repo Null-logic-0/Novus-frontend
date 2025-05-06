@@ -25,6 +25,7 @@ import Error from "./pages/Error.jsx";
 import Direct from "./pages/Direct.jsx";
 import DirectRoot from "./pages/DirectRoot.jsx";
 import Inbox from "./pages/Inbox.jsx";
+import NotificationProvider from "../components/Notification/NotificationProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,9 @@ const router = createBrowserRouter([
     element: (
       <ProtectRoutes>
         <AppShell>
-          <RootLayout />
+          <NotificationProvider>
+            <RootLayout />
+          </NotificationProvider>
         </AppShell>
       </ProtectRoutes>
     ),
@@ -67,7 +70,9 @@ const router = createBrowserRouter([
     element: (
       <ProtectRoutes>
         <AppShell>
-          <DirectRoot />
+          <NotificationProvider>
+            <DirectRoot />
+          </NotificationProvider>
         </AppShell>
       </ProtectRoutes>
     ),

@@ -2,10 +2,8 @@ import { Outlet } from "react-router";
 
 import MainHeader from "../../components/MainHeader";
 import NavMenu from "../../components/NavMenu/NavMenu";
-import { usePostSocketEvents } from "../../hooks/usePostSocket";
 
 function RootLayout() {
-  usePostSocketEvents();
   return (
     <div className="min-h-screen flex flex-col bg-black text-white overflow-y-auto">
       <MainHeader />
