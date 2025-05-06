@@ -8,6 +8,7 @@ import EditProfile from "./EditProfile";
 import FollowUnfollowButton from "./FollowUnfollowButton";
 import FollowStats from "./FollowStats";
 import ProfileDropdownMenu from "./ProfileDropDownMenu";
+import SendMessageButton from "./Chat/SendMessageButton";
 
 function ProfileHeader({ userData, currentUser, userId }) {
   const followers = userData?.data?.user?.followers?.length ?? 0;
@@ -56,8 +57,9 @@ function ProfileHeader({ userData, currentUser, userId }) {
             Edit Profile
           </Button>
         ) : (
-          <div className="flex w-full justify-center items-center gap-4">
+          <div className="flex w-full justify-center items-center gap-2">
             <FollowUnfollowButton isBigButton isFullButton userId={userId} />
+            <SendMessageButton userId={userId} />
             <ProfileDropdownMenu
               userId={userId}
               userName={userData?.data?.user?.fullName}

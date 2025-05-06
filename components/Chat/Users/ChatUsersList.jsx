@@ -1,18 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "../../../hooks/useAuth";
-import { getCreatedChats } from "../../../util/http";
+import { useChats } from "../../../hooks/useChats";
 
 import LoadingIndicator from "../../UI/LoadingIndicator";
 import Empty from "../ChatIsEmpty";
 import UserListItem from "./UserListItem";
 
 function ChatUsersList() {
-  const { token } = useAuth();
-
-  const { isError, error, data, isPending } = useQuery({
-    queryKey: ["chats"],
-    queryFn: () => getCreatedChats(token),
-  });
+  const { isError, error, data, isPending } = useChats();
 
   const chats = data?.data?.chats || [];
 

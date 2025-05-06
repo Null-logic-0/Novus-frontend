@@ -1,15 +1,12 @@
 import { useDispatch } from "react-redux";
-import { useMutation } from "@tanstack/react-query";
-import { getSocket } from "../../../lib/socket";
+import { useCreateChat } from "../../../hooks/useCreateChat";
 import { useAllUsers } from "../../../hooks/useAllUsers";
-import { createChat, queryClient } from "../../../util/http";
 import { useAuth } from "../../../hooks/useAuth";
 import { hideUsers } from "../../../store/UI-slice";
 
 import LoadingIndicator from "../../UI/LoadingIndicator";
 import Empty from "../ChatIsEmpty";
 import UserListItem from "./UserListItem";
-import toast from "react-hot-toast";
 
 function ChannelUserList({ searchTerm }) {
   const { token } = useAuth();
@@ -24,20 +21,7 @@ function ChannelUserList({ searchTerm }) {
       )
     : users;
 
-  const { mutate } = useMutation({
-    mutationFn: createChat,
-    onSuccess: (data) => {
-      const socket = getSocket();
-
-      if (socket) {
-        socket.emit("new-chat", data?.data?.chat);
-      }
-      queryClient.invalidateQueries({ queryKey: ["chats"] });
-    },
-    onError: () => {
-      toast.error("Failed to create chat!");
-    },
-  });
+  const { mutate } = useCreateChat();
 
   function handleCreateChat(userId) {
     mutate({ token, userIds: [userId] });
