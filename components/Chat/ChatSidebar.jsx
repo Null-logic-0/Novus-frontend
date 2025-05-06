@@ -9,14 +9,20 @@ function ChatSidebar() {
   const isUsersVisible = useSelector((state) => state.ui.showUsers);
   const [searchTerm, setSearchTerm] = useState("");
 
-  return (
-    <div className=" bg-[#17191C] lg:max-w-[360px] w-full h-screen overflow-scroll border-r-2 border-[#272A30]">
+  const SidebarContent = (
+    <>
       <ChatChannelHeader setSearchTerm={setSearchTerm} />
       {isUsersVisible ? (
         <ChannelUserList searchTerm={searchTerm} />
       ) : (
         <ChatUsersList />
       )}
+    </>
+  );
+
+  return (
+    <div className="bg-[#17191C] md:max-w-[360px] w-full  h-screen overflow-scroll border-r-2 border-[#272A30]">
+      {SidebarContent}
     </div>
   );
 }

@@ -30,7 +30,7 @@ function Search() {
       <div className="w-full justify-center mx-0 gap-5 flex flex-col items-center">
         <PagesHeader title={"Search"} />
         <MainContainer>
-          <div className="p-6">
+          <div className="p-6 max-md:p-2">
             <SearchInput
               onSubmit={(e) => e.preventDefault()}
               value={searchTerm}
@@ -40,11 +40,11 @@ function Search() {
 
           <hr className="border-[#4d4d4d]" />
 
-          <p className="text-[#4d4d4d] text-[16px] font-semibold px-6 py-2">
+          <p className="text-[#4d4d4d] text-[16px] font-semibold max-md:px-2 px-6 py-2 max-md:text-sm">
             Follow suggestions
           </p>
 
-          <section className="px-6 py-4">
+          <section className="px-6 py-4 max-md:px-2 max-md:py-2">
             {isLoading && (
               <div className="flex w-full justify-center items-center">
                 <LoadingIndicator />

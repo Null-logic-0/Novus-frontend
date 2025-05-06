@@ -28,7 +28,7 @@ function Activity() {
       <div className="w-full justify-center mx-0 gap-5 flex flex-col items-center">
         <PagesHeader title="Activity" />
         <MainContainer>
-          <section className="px-6 py-4">
+          <section className="px-6 py-4 max-md:px-0">
             {isPending && (
               <div className="flex w-full justify-center items-center">
                 <LoadingIndicator />

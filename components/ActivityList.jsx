@@ -13,17 +13,17 @@ function ActivityList({ isError, isPending, userActivities }) {
                 link={`/${activity.fromUser._id}`}
                 alt={`${activity.fromUser.fullName}-avatar`}
               />
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold opacity-50">
+              <div className="flex  items-center flex-wrap gap-2">
+                <p className="text-sm font-semibold opacity-50 max-md:text-[12px]">
                   {activity.fromUser.fullName}
                 </p>
                 -
                 {activity.type === "like" ? (
-                  <p className="text-white opacity-50 text-sm font-semibold">
+                  <p className="text-white opacity-50 max-md:text-[12px] text-sm font-semibold">
                     Liked your post {formatDate(activity.createdAt)}
                   </p>
                 ) : (
-                  <p className="text-white opacity-50 text-sm font-semibold">
+                  <p className="text-white opacity-50 text-sm  max-md:text-[12px] font-semibold">
                     Followed you {formatDate(activity.createdAt)}
                   </p>
                 )}
@@ -32,7 +32,7 @@ function ActivityList({ isError, isPending, userActivities }) {
 
             {activity.type === "like" && (
               <img
-                className="w-10 h-10 object-cover rounded-lg"
+                className="w-10 h-10 object-cover rounded-lg max-md:w-8 max-md:h-8 max-md:rounded-none"
                 src={activity?.targetPost?.media[0]}
                 alt={`${activity?.targetPost?.user.fullName}-avatar`}
               />

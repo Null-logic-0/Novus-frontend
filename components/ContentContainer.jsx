@@ -4,7 +4,7 @@ function ContentContainer({ children, className }) {
   return (
     <section
       className={twMerge(
-        "h-auto w-full md:bg-[#171717] border-t rounded-b-3xl   border-[#383838] p-4",
+        "h-auto w-full bg-[#171717] border-t md:rounded-b-3xl   border-[#383838] p-4",
         className
       )}
     >

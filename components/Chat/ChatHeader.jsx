@@ -5,9 +5,12 @@ import { getSingleChat } from "../../util/http";
 
 import ProfileAvatar from "../ProfileAvatar";
 import { MdArrowBackIos } from "react-icons/md";
+// import { useDispatch } from "react-redux";
+// import { showChatSidebar } from "../../store/UI-slice";
 
 function ChatHeader({ id }) {
   const { token } = useAuth();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { data } = useQuery({
@@ -15,9 +18,14 @@ function ChatHeader({ id }) {
     queryFn: () => getSingleChat({ token, id }),
   });
 
+  function handleBack() {
+    // dispatch(showChatSidebar());
+    navigate("/direct");
+  }
+
   return (
     <div className="flex gap-[8px] z-10 fixed w-full  items-center border-b-3 px-[8px] py-[16px] border-[#272A30] bg-[#17191C]">
-      <button onClick={() => navigate("/direct")} className="xl:hidden">
+      <button onClick={handleBack} className="xl:hidden">
         <MdArrowBackIos className="font-bold text-white text-2xl " />
       </button>
       <ProfileAvatar

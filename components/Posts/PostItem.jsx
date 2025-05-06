@@ -24,12 +24,12 @@ function PostItem({
 
   return (
     <div className="flex justify-between w-full items-start">
-      <div className="flex items-start max-md:justify-center w-full  gap-2 ">
+      <div className="flex items-start  w-full  gap-2 ">
         <ProfileAvatar alt={name} img={profileImg} />
 
         <div className="flex flex-col p-[2px]">
           <FollowUnfollowButton userId={userId} />
-          <p className="font-bold text-[14px]">
+          <p className="font-bold text-[14px] ">
             <Link to={`/${userId}`} className="hover:underline">
               {name}
             </Link>
@@ -37,9 +37,9 @@ function PostItem({
               {formatDate(date)}
             </span>
           </p>
-          <p className="text-[14px]">{caption}</p>
+          <p className="text-[14px] max-md:text-[12px]">{caption}</p>
           <MediaGallery
-            className="overflow-x-scroll pt-2 max-w-[550px] max-md:max-w-[300px] max-md:pr-4 flex  items-start gap-2 pr-6  scrollbar-hide"
+            className="overflow-x-scroll pt-2 max-w-[550px] max-md:max-w-[260px] max-md:pr-4 flex  items-start gap-2 pr-6  scrollbar-hide"
             media={media}
             link={`/${userId}/post/${postId}/media`}
           />

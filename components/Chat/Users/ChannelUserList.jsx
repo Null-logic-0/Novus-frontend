@@ -27,10 +27,7 @@ function ChannelUserList({ searchTerm }) {
   const { mutate } = useMutation({
     mutationFn: createChat,
     onSuccess: (data) => {
-      console.log(data?.data?.chat, "DATA");
-
       const socket = getSocket();
-      console.log(socket, "Socket");
 
       if (socket) {
         socket.emit("new-chat", data?.data?.chat);

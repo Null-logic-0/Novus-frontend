@@ -10,7 +10,7 @@ function CommentForm({ placeholder, onSubmit }) {
           placeholder={placeholder}
           isTextarea
           name="text"
-          className="py-2 pl-5 resize-none border-2 rounded-full h-10 w-full text-white"
+          className="py-2 pl-5 resize-none border-2 max-md:text-sm rounded-full h-10 w-full text-white"
         />
         <button
           type="submit"

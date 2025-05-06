@@ -26,7 +26,7 @@ function CommentItem({
       <div className="flex flex-col items-start gap-2  w-full">
         <div className="flex justify-between w-full">
           <div className="flex items-center gap-2">
-            <p className="font-bold">{comment.user?.fullName}</p>
+            <p className="font-bold max-md:text-sm">{comment.user?.fullName}</p>
             <span className="text-sm font-semibold opacity-50">
               {formatDate(comment.createdAt)}
             </span>

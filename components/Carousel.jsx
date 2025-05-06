@@ -56,7 +56,7 @@ function Carousel({ media }) {
       {allMedia.length > 1 && (
         <button
           onClick={goPrev}
-          className={`absolute left-2 z-10 text-white bg-[#1f1f1f] max-md:text-sm max-md:p-2 rounded-full p-4 ${
+          className={`absolute left-2  z-10 text-white bg-[#1f1f1f] max-md:text-sm max-md:p-2 rounded-full p-4 ${
             currentIndex === 0 ? "cursor-not-allowed" : "cursor-pointer"
           }`}
           disabled={currentIndex === 0}
@@ -70,7 +70,7 @@ function Carousel({ media }) {
           <button
             type="button"
             onClick={() => setMuted((prev) => !prev)}
-            className="absolute z-50 right-0 bottom-2 max-md:text-sm max-md:p-2 text-xl text-white px-3 py-1 rounded-md cursor-pointer"
+            className="absolute z-50 right-0  bottom-2 max-md:text-sm max-md:p-2 text-xl text-white px-3 py-1 rounded-md cursor-pointer"
           >
             {muted ? <VscMute /> : <VscUnmute />}
           </button>
@@ -80,7 +80,7 @@ function Carousel({ media }) {
             loop
             muted={muted}
             playsInline
-            className="rounded-xl w-[450px] max-md:w-50 h-full object-cover"
+            className="rounded-xl w-[450px] max-md:w-80 h-full object-cover"
           />
         </div>
       ) : (
@@ -88,7 +88,7 @@ function Carousel({ media }) {
           key={currentMedia.id}
           src={currentMedia.src}
           alt={`media-${currentMedia.id}`}
-          className="rounded-xl max-w-[600px]  max-md:w-50 h-full object-cover"
+          className="rounded-xl max-w-[600px]  max-md:w-80 h-full object-cover max-md:object-contain"
           style={{ maxWidth: "none" }}
         />
       )}

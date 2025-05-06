@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { activeModal: null, showUsers: false },
+  initialState: { activeModal: null, showUsers: false, chatSideBar: true },
   reducers: {
     openModal(state, action) {
       state.activeModal = action.payload;
@@ -17,9 +17,22 @@ const uiSlice = createSlice({
     hideUsers: (state) => {
       state.showUsers = false;
     },
+    showChatSidebar: (state) => {
+      state.chatSideBar = true;
+    },
+    hideChatSidebar: (state) => {
+      state.chatSideBar = false;
+    },
   },
 });
 
-export const { openModal, closeModal, showUsers, hideUsers } = uiSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  showUsers,
+  hideUsers,
+  hideChatSidebar,
+  showChatSidebar,
+} = uiSlice.actions;
 
 export default uiSlice;

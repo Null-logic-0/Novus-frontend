@@ -18,7 +18,9 @@ function UserList({ users = [], isBlocked }) {
                 alt={`${user?.fullName}-avatar`}
                 img={user?.profileImage}
               />
-              <p className="text-white font-semibold">{user.fullName}</p>
+              <p className="text-white font-semibold max-md:text-sm">
+                {user.fullName}
+              </p>
             </div>
 
             {isBlocked ? (

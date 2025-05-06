@@ -12,7 +12,7 @@ function SearchInput({ onSubmit, value, onChange, ...props }) {
         placeholder="Search..."
         value={value}
         onChange={onChange}
-        className="rounded-2xl border border-[#4d4d4d] bg-[#0a0a0a] px-4 py-3"
+        className="rounded-2xl border border-[#4d4d4d] max-md:text-sm bg-[#0a0a0a] px-4 py-3"
       />
     </form>
   );

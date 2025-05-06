@@ -28,7 +28,7 @@ function ProfileHeader({ userData, currentUser, userId }) {
       <div className="w-full flex flex-col gap-12 p-6">
         <div className=" flex justify-between items-center ">
           <div className="flex flex-col gap-2">
-            <h1 className="font-bold text-2xl">
+            <h1 className="font-bold text-2xl max-md:text-xl">
               {userData?.data?.user?.fullName}
             </h1>
 
@@ -43,7 +43,7 @@ function ProfileHeader({ userData, currentUser, userId }) {
             />
           </div>
           <ProfileAvatar
-            className="w-20 h-20"
+            className="w-20 h-20 max-md:w-15 max-md:h-15"
             img={userData?.data?.user?.profileImage}
             alt={`${userData?.data?.user?.fullName}-avatar`}
           />

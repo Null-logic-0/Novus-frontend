@@ -4,7 +4,11 @@ import { closeModal, openModal } from "../../store/UI-slice";
 
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineHome } from "react-icons/ai";
-import { RiMessage3Fill, RiMessage3Line, RiSearch2Fill } from "react-icons/ri";
+import {
+  RiMessengerFill,
+  RiMessengerLine,
+  RiSearch2Fill,
+} from "react-icons/ri";
 import { RiSearch2Line } from "react-icons/ri";
 import { GoHeart } from "react-icons/go";
 import { GoHeartFill } from "react-icons/go";
@@ -39,9 +43,10 @@ function NavMenuList() {
           unActive={<AiOutlineHome />}
         />
         <NavItem
+          className="max-md:hidden"
           link="/direct"
-          active={<RiMessage3Fill />}
-          unActive={<RiMessage3Line />}
+          active={<RiMessengerFill />}
+          unActive={<RiMessengerLine />}
         />
         <NavItem
           link="/search"
