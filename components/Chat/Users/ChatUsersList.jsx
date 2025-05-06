@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../../hooks/useAuth";
+import { getCreatedChats } from "../../../util/http";
+
 import LoadingIndicator from "../../UI/LoadingIndicator";
 import Empty from "../ChatIsEmpty";
 import UserListItem from "./UserListItem";
-import { getCreatedChats } from "../../../util/http";
 
 function ChatUsersList() {
   const { token } = useAuth();
@@ -25,8 +26,8 @@ function ChatUsersList() {
             isChat
             chatId={chat._id}
             key={chat._id}
-            fullName={chat.otherUser.fullName}
-            img={chat.otherUser.profileImage}
+            fullName={chat?.otherUser?.fullName}
+            img={chat?.otherUser?.profileImage}
           />
         ))}
 
