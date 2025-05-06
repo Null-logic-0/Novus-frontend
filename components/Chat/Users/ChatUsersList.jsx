@@ -5,12 +5,9 @@ import { getCreatedChats } from "../../../util/http";
 import LoadingIndicator from "../../UI/LoadingIndicator";
 import Empty from "../ChatIsEmpty";
 import UserListItem from "./UserListItem";
-import { useDispatch } from "react-redux";
-import { hideChatSidebar } from "../../../store/UI-slice";
 
 function ChatUsersList() {
   const { token } = useAuth();
-  const dispatch = useDispatch();
 
   const { isError, error, data, isPending } = useQuery({
     queryKey: ["chats"],
@@ -18,10 +15,6 @@ function ChatUsersList() {
   });
 
   const chats = data?.data?.chats || [];
-
-  function handleCloseSideBar() {
-    dispatch(hideChatSidebar());
-  }
 
   return (
     <ul className="flex flex-col gap-[11.5px]">
@@ -31,7 +24,6 @@ function ChatUsersList() {
           <UserListItem
             link={`inbox/${chat._id}`}
             isChat
-            onClick={handleCloseSideBar}
             chatId={chat._id}
             key={chat._id}
             fullName={chat?.otherUser?.fullName}
