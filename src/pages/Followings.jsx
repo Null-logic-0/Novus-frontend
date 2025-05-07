@@ -32,7 +32,7 @@ function Followings() {
                 likes={post.likes ?? []}
                 initialLikes={post.likes.length}
                 date={post.createdAt}
-                link={`posts/${post.user._id}/post/${post._id}`}
+                link={`/posts/${post.user._id}/post/${post._id}`}
               />
             </ContentContainer>
           ))
