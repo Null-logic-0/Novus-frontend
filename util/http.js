@@ -3,7 +3,7 @@ import { QueryClient } from "@tanstack/react-query";
 export const queryClient = new QueryClient();
 
 const URL =
-  import.meta.env.VITE_LOCAL_DATA_URL || import.meta.env.VITE_DATA_URL;
+  import.meta.env.VITE_DATA_URL || import.meta.env.VITE_LOCAL_DATA_URL;
 
 async function auth(data, path, message) {
   const response = await fetch(`${URL}/users/${path}`, {

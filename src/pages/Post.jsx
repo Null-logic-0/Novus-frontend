@@ -40,7 +40,6 @@ function Post() {
               />
             </ContentContainer>
             <PostComments
-              userId={userId}
               postId={post?._id}
               post={post?.user?.fullName ?? ""}
             />

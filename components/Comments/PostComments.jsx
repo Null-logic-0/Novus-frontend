@@ -6,7 +6,7 @@ import { getComments } from "../../util/http";
 import { useAuth } from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 
-function PostComments({ postId, post, userId }) {
+function PostComments({ postId, post }) {
   const { token } = useAuth();
   const [parentCommentId, setParentCommentId] = useState(null);
 
@@ -26,7 +26,6 @@ function PostComments({ postId, post, userId }) {
   return (
     <>
       <Comments
-        userId={userId}
         postId={postId}
         setParentCommentId={setParentCommentId}
         comments={comments?.data?.comments || []}

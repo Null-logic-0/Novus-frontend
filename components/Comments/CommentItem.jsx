@@ -11,10 +11,10 @@ function CommentItem({
   commentId,
   postId,
   comments,
-  userId,
 }) {
   const { userData } = useAuth();
   const currentLoggedInUser = userData.data.user._id;
+
   return (
     <div className="flex  items-start gap-3">
       <ProfileAvatar
@@ -31,7 +31,7 @@ function CommentItem({
               {formatDate(comment.createdAt)}
             </span>
           </div>
-          {currentLoggedInUser === userId && (
+          {currentLoggedInUser === comment.user?._id && (
             <CommentDropdownMenu commentId={commentId} />
           )}
         </div>
