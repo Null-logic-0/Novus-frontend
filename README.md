@@ -6,6 +6,9 @@ React.js + Vite: Fast and modern frontend setup for performance and DX
 
 TanStack React Query: Efficient data fetching, caching, and synchronization
 
+React Router – Client-side routing with dynamic routes
+
+
 Tailwind CSS: Utility-first CSS framework for responsive design
 
 Redux Toolkit: Centralized and scalable state management
