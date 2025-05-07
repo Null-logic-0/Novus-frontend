@@ -26,7 +26,6 @@ function CreatePostBar() {
       <div className="flex items-center justify-between p-4 max-md:hidden">
         <div className="flex items-center w-full">
           <ProfileAvatar
-            link="user"
             alt={`${userData?.data?.user?.fullName}-avatar`}
             img={userData?.data?.user?.profileImage}
           />
