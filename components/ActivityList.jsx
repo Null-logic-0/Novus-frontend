@@ -30,12 +30,26 @@ function ActivityList({ isError, isPending, userActivities }) {
               </div>
             </div>
 
-            {activity.type === "like" && (
+            {/* {activity.type === "like" && (
               <img
                 className="w-10 h-10 object-cover rounded-lg max-md:w-8 max-md:h-8 max-md:rounded-none"
                 src={activity?.targetPost?.media[0]}
                 alt={`${activity?.targetPost?.user.fullName}-avatar`}
               />
+            )} */}
+
+            {activity.type === "like" && (
+              <>
+                {!activity?.targetPost?.media[0]?.match(
+                  /\.(mp4|webm|ogg)$/
+                ) && (
+                  <img
+                    className="w-10 h-10 object-cover rounded-lg max-md:w-8 max-md:h-8 max-md:rounded-none"
+                    src={activity?.targetPost?.media[0]}
+                    alt={`${activity?.targetPost?.user.fullName}-image`}
+                  />
+                )}
+              </>
             )}
           </li>
         ))
